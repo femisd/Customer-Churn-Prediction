@@ -120,10 +120,15 @@ buildRandomForest <- function(){
   
   sink(file = paste("randomF.txt"), append = T)
   
+  cat("Random Forest")
+  cat("\n")
+  cat("\n")
+  cat("\n")
+  
   # Print model result
   cat("Model Result")
   cat("\n")
-  model$result
+  print(model$result)
   
   cat("\n")
   cat("\n")
@@ -131,7 +136,7 @@ buildRandomForest <- function(){
   #Print class probability
   cat("Class Probability Results")
   cat("\n")
-  head(classProbabilityResult)
+  print(head(classProbabilityResult))
   cat("\n")
   cat("\n")
   
@@ -139,17 +144,17 @@ buildRandomForest <- function(){
   #Print confusion matrix
   cat("Confusion Matrix")
   cat("\n")
-  confusionMatrix
+  print(confusionMatrix)
   cat("\n")
   cat("\n")
   
-  cat("Threshold")
-  bestThreshold
+  cat("Threshold: ")
+  cat(bestThreshold)
   cat("\n")
   cat("\n")
   
-  cat("MCC")
-  mcc
+  cat("MCC Result: ")
+  print(mcc)
   
   
   

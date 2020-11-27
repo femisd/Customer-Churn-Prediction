@@ -1,0 +1,55 @@
+Random Forest
+
+
+Model Result
+  mtry  Accuracy     Kappa   AccuracySD      KappaSD
+1    2 0.7986714 0.4256915 0.0118502594 0.0036541874
+2    7 0.7899521 0.4257590 0.0038096763 0.0020283660
+3   13 0.7899522 0.4257380 0.0027372868 0.0009037763
+4   19 0.7882464 0.4211453 0.0003248679 0.0089552793
+5   25 0.7884357 0.4238297 0.0027376934 0.0009268546
+
+
+Class Probability Results
+      0     1
+1 0.542 0.458
+2 0.976 0.024
+3 0.700 0.300
+4 0.992 0.008
+5 0.158 0.842
+6 0.128 0.872
+
+
+Confusion Matrix
+Confusion Matrix and Statistics
+
+          Reference
+Prediction    0    1
+         0 3649  592
+         1  224  810
+                                         
+               Accuracy : 0.8453         
+                 95% CI : (0.8353, 0.855)
+    No Information Rate : 0.7342         
+    P-Value [Acc > NIR] : < 2.2e-16      
+                                         
+                  Kappa : 0.5674         
+                                         
+ Mcnemar's Test P-Value : < 2.2e-16      
+                                         
+            Sensitivity : 0.5777         
+            Specificity : 0.9422         
+         Pos Pred Value : 0.7834         
+         Neg Pred Value : 0.8604         
+             Prevalence : 0.2658         
+         Detection Rate : 0.1536         
+   Detection Prevalence : 0.1960         
+      Balanced Accuracy : 0.7600         
+                                         
+       'Positive' Class : 1              
+                                         
+
+
+Threshold: 0.147
+
+MCC Result: [1] 0.5785373
