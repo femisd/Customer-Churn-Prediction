@@ -1,55 +1,76 @@
 Random Forest
 
 
-Model Result
-  mtry  Accuracy     Kappa   AccuracySD      KappaSD
-1    2 0.7986714 0.4256915 0.0118502594 0.0036541874
-2    7 0.7899521 0.4257590 0.0038096763 0.0020283660
-3   13 0.7899522 0.4257380 0.0027372868 0.0009037763
-4   19 0.7882464 0.4211453 0.0003248679 0.0089552793
-5   25 0.7884357 0.4238297 0.0027376934 0.0009268546
+-------Model Result-------
+  mtry  Accuracy     Kappa  AccuracySD    KappaSD
+1    2 0.7671184 0.5342368 0.025722144 0.05144429
+2    7 0.7485735 0.4971469 0.006556625 0.01311325
+3   13 0.7475036 0.4950071 0.008069692 0.01613938
+4   19 0.7435806 0.4871612 0.008574048 0.01714810
+5   25 0.7417974 0.4835949 0.010087115 0.02017423
 
 
-Class Probability Results
-      0     1
-1 0.542 0.458
-2 0.976 0.024
-3 0.700 0.300
-4 0.992 0.008
-5 0.158 0.842
-6 0.128 0.872
+----Class Probability Results----
+[1] 0.696 0.058 0.520 0.040 0.970 0.974
 
 
-Confusion Matrix
+-------Confusion Matrix-------
 Confusion Matrix and Statistics
 
           Reference
-Prediction    0    1
-         0 3649  592
-         1  224  810
+Prediction   0   1
+         0 914  84
+         1 376 383
                                          
-               Accuracy : 0.8453         
-                 95% CI : (0.8353, 0.855)
+               Accuracy : 0.7382         
+                 95% CI : (0.717, 0.7586)
     No Information Rate : 0.7342         
-    P-Value [Acc > NIR] : < 2.2e-16      
+    P-Value [Acc > NIR] : 0.3642         
                                          
-                  Kappa : 0.5674         
+                  Kappa : 0.4407         
                                          
- Mcnemar's Test P-Value : < 2.2e-16      
+ Mcnemar's Test P-Value : <2e-16         
                                          
-            Sensitivity : 0.5777         
-            Specificity : 0.9422         
-         Pos Pred Value : 0.7834         
-         Neg Pred Value : 0.8604         
+            Sensitivity : 0.8201         
+            Specificity : 0.7085         
+         Pos Pred Value : 0.5046         
+         Neg Pred Value : 0.9158         
              Prevalence : 0.2658         
-         Detection Rate : 0.1536         
-   Detection Prevalence : 0.1960         
-      Balanced Accuracy : 0.7600         
+         Detection Rate : 0.2180         
+   Detection Prevalence : 0.4320         
+      Balanced Accuracy : 0.7643         
                                          
        'Positive' Class : 1              
                                          
 
 
-Threshold: 0.147
+Threshold: 0.525
 
-MCC Result: [1] 0.5785373
+MCC Result: 0.4714547
+
+-----Variable Importance------
+rf variable importance
+
+  only 20 most important variables shown (out of 25)
+
+                              Overall
+tenure                        100.000
+TotalCharges                   82.475
+ContractMonth.to.month         80.801
+MonthlyCharges                 73.195
+X                              46.923
+ContractTwo.year               45.195
+InternetServiceFiber.optic     39.751
+PaymentMethodElectronic.check  29.698
+InternetServiceNo              20.257
+ContractOne.year               16.417
+OnlineSecurityYes              14.764
+PaperlessBillingYes            12.438
+TechSupportYes                 11.432
+OnlineSecurityNo               11.106
+InternetServiceDSL              9.228
+DependentsYes                   8.435
+StreamingTVYes                  6.366
+PartnerYes                      4.810
+StreamingMoviesYes              4.770
+OnlineBackupYes                 4.203

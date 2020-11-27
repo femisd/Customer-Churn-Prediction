@@ -1,0 +1,35 @@
+NeuralNet
+
+threshold
+0.2674
+
+mcc
+0.4505177
+
+Confusion Matrix and Statistics
+
+          Reference
+Prediction    0    1
+         0 1168  231
+         1  122  236
+                                          
+               Accuracy : 0.7991          
+                 95% CI : (0.7796, 0.8176)
+    No Information Rate : 0.7342          
+    P-Value [Acc > NIR] : 1.417e-10       
+                                          
+                  Kappa : 0.4438          
+                                          
+ Mcnemar's Test P-Value : 9.017e-09       
+                                          
+            Sensitivity : 0.5054          
+            Specificity : 0.9054          
+         Pos Pred Value : 0.6592          
+         Neg Pred Value : 0.8349          
+             Prevalence : 0.2658          
+         Detection Rate : 0.1343          
+   Detection Prevalence : 0.2038          
+      Balanced Accuracy : 0.7054          
+                                          
+       'Positive' Class : 1               
+                                          

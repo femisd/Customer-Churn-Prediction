@@ -1,21 +1,10 @@
-# Install mltools 
-
-#install.packages("mltools")
-
-#load library
-# library(caret)
-# library(PerformanceAnalytics)
-# library(pROC)
-# library(mltools)
-
-
 # dataset variables
 DATA_FILE <- "PreprocessedTelco.csv"
 KEY_COLUMN <- "ChurnYes"
 
 # Learning model variables
 MODEL_METHOD <- "rf"
-TRAINING_PARAM <- ChurnYes ~.
+TRAINING_PARAM <- Class ~.
 TUNEL_LENGTH <- 5
 
 # Cross validation variables
@@ -24,6 +13,7 @@ REPEATS <- 1
 P_VALUE <- .75
 VALIDATION_METHOD <- "repeatedcv"
 CONFUSION_MATRIX_POSITIVE_CLASS <- "1"
+
 
 
 #Read dataset
@@ -42,7 +32,11 @@ separateTrainingSet <- function(dataset, pValue, keyColumn){
 
 # Return training data
 getTrainingData <- function(dataset, trainSet){
-  return (dataset[trainSet,])
+  trainSet <- dataset[trainSet,]
+  set.seed(100)
+  downtrainData <- downSample(x = trainSet[, -ncol(trainSet)],
+                              y = factor(trainSet[,KEY_COLUMN]))
+  return (downtrainData)
 }
 
 # Return testing data
@@ -63,7 +57,7 @@ generateRandomForestModel <- function(trainingParam, data, modelMethod, tunelLen
 createClassProbabilityPrediction <- function(model, dataset){
   #Predict class probabilities against the original dataset
   prediction <- predict(model, dataset, "prob")
-  return(prediction)
+  return(prediction[,2])
 }
 
 # generate confusion matrix
@@ -111,11 +105,13 @@ buildRandomForest <- function(){
   
   model <- generateRandomForestModel(TRAINING_PARAM, trainingData, MODEL_METHOD, TUNEL_LENGTH, kControl)
   classProbabilityResult <- createClassProbabilityPrediction(model, dataset)
-  confusionMatrix <- creatConfusionMatrix(model, trainingData, KEY_COLUMN, CONFUSION_MATRIX_POSITIVE_CLASS)
+  confusionMatrix <- creatConfusionMatrix(model, testingData, KEY_COLUMN, CONFUSION_MATRIX_POSITIVE_CLASS)
 
   
   bestThreshold <- createRoc(model, testingData, KEY_COLUMN)
   mcc <- createMcc(model, testingData,confusionMatrix)
+  
+  importantVariables <- caret::varImp(model)
   
   
   sink(file = paste("randomF.txt"), append = T)
@@ -126,7 +122,7 @@ buildRandomForest <- function(){
   cat("\n")
   
   # Print model result
-  cat("Model Result")
+  cat("-------Model Result-------")
   cat("\n")
   print(model$result)
   
@@ -134,7 +130,7 @@ buildRandomForest <- function(){
   cat("\n")
   
   #Print class probability
-  cat("Class Probability Results")
+  cat("----Class Probability Results----")
   cat("\n")
   print(head(classProbabilityResult))
   cat("\n")
@@ -142,7 +138,7 @@ buildRandomForest <- function(){
   
   
   #Print confusion matrix
-  cat("Confusion Matrix")
+  cat("-------Confusion Matrix-------")
   cat("\n")
   print(confusionMatrix)
   cat("\n")
@@ -154,7 +150,13 @@ buildRandomForest <- function(){
   cat("\n")
   
   cat("MCC Result: ")
-  print(mcc)
+  cat(mcc)
+  cat("\n")
+  cat("\n")
+  
+  cat("-----Variable Importance------")
+  cat("\n")
+  print(importantVariables)
   
   
   
