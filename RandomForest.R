@@ -80,6 +80,13 @@ createRoc <- function(model, testingData, predictor){
   return(bestThreshold)
 }
 
+# AUC
+
+generateAuc <- function (model, testingData, predictor){
+  pred <- predict(model, type = "prob", newdata = testingData)
+  auc<-auc(testingData[, predictor],pred[,2])
+}
+
 # MCC
 
 createMcc <- function(model, testingData, confusionMat) {
@@ -109,6 +116,7 @@ buildRandomForest <- function(){
 
   
   bestThreshold <- createRoc(model, testingData, KEY_COLUMN)
+  auc <- generateAuc(model, testingData, KEY_COLUMN)
   mcc <- createMcc(model, testingData,confusionMatrix)
   
   importantVariables <- caret::varImp(model)
@@ -140,14 +148,24 @@ buildRandomForest <- function(){
   #Print confusion matrix
   cat("-------Confusion Matrix-------")
   cat("\n")
+  
   print(confusionMatrix)
   cat("\n")
+  cat("\n")
+  
+  cat("-------Evaluation-------")
   cat("\n")
   
   cat("Threshold: ")
   cat(bestThreshold)
   cat("\n")
   cat("\n")
+  
+  cat("AUC: ")
+  cat(auc)
+  cat("\n")
+  cat("\n")
+  
   
   cat("MCC Result: ")
   cat(mcc)

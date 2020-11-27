@@ -117,6 +117,10 @@ evaluateModel <- function(model,testingData,modelName){
   #create roc curve to find best threshhold
   rocObj <- roc(testingData[,PREDICTOR],pred[,2],plot=TRUE, legacy.axes=TRUE, print.auc=TRUE, main=paste("Logistic regression - ",modelName))
   
+  #create auc
+  
+  auc<-auc(testingData[, PREDICTOR],pred[,2])
+  
   #Outputting the evaluation metrics to txt file
   print(paste(modelName,"-","Outputting evaluation metrics to txt file"))
   sink(file = paste("lr",modelName,"_evaluation_metrics.txt"), append = T)
@@ -128,6 +132,13 @@ evaluateModel <- function(model,testingData,modelName){
   cat("\n")
   bestThreshold <- round(coords(rocObj, "best", "threshold",transpose = TRUE)[1],digits = 4)
   cat(bestThreshold)
+  cat("\n")
+  
+  #AUC
+  cat("\n")
+  cat("Area Under The Curve")
+  cat("\n")
+  cat(auc)
   cat("\n")
   
   #Matthews correlation coefficient

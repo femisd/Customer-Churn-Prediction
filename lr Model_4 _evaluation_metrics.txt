@@ -3,6 +3,9 @@ LOGISTIC REGRESSION
 Best threshold
 0.5298
 
+Area Under The Curve
+0.8314927
+
 mcc
 0.4593863
 
