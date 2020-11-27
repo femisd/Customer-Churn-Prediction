@@ -140,7 +140,10 @@ evaluateModel <- function(model,testingData,modelName){
   
   cat("\n")
   confMatrixOptimal <- confusionMatrixCutoff(cutoff = bestThreshold,pred = pred, testData = testingData)
+  
   sink(file = NULL)
+  print("basic logistic regression metrics")
+  print(confMatrixOptimal)
 }
 
 # ************************************************
