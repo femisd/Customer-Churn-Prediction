@@ -179,14 +179,17 @@ nueralNet<-function(){
   trainingData<-maxmindf[totTrain,]
   testingData <-maxmindf[-totTrain,]
   
-  trainingData <- data.frame(trainingData)
+  downtrainData <- downSample(x = trainingData[, -ncol(trainingData)],
+                              y = factor(trainingData[,DEPENDEDNT_VARIABLE]))
+  
+  trainingData <- data.frame(downtrainData)
   
    #ten fold val
-   kControl <- trainControl(method = "repeatedcv",number =1,repeats=3)
+   kControl <- trainControl(method = "repeatedcv",number =10,repeats=3)
     
    print(Sys.time())
    
-   telcoTrain <- trainModel(ChurnYes~.,trainingData,"nnet",MAX_ITER,expand.grid(.size=c(1,3,5,7,10,12,20),.decay=c(0,0.001,0.1,1,4,10)), kControl)
+   telcoTrain <- trainModel(Class~.,trainingData,"nnet",MAX_ITER,expand.grid(.size=c(1,3,5,7,10),.decay=c(0,0.001,0.1,1)), kControl)
    
    predicitonMod<- createPrediciton(telcoTrain,testingData)
    
@@ -196,87 +199,49 @@ nueralNet<-function(){
    
    rocVal<- createRocCurve(testingData,DEPENDEDNT_VARIABLE,probPredictTelco,telcoTrain)
    
+   auc<-auc(testingData[, DEPENDEDNT_VARIABLE],probPredictTelco[,2])
+   
    bestThreshold <- getBestThreshold(rocVal)
-      
-  # matthewsCorrelation <-  mcc(predicted = testPredictTelco[,1], actual = testing$ChurnYes, cutoff = bestThreshold)
+
    
-   #printDataToFile(rocVal,matthewsCorrelation,confusionMat,bestThreshold)
-   
-   # print(bestThreshold)
-   
- #  confuTab <-confusionMat$table[1]
    TP<-confusionMat$table[1]
    FN<-confusionMat$table[2]
    FP<-confusionMat$table[3]
    TN<-confusionMat$table[4]
     
    matthewsCorrelation <-  matthew(TP,FP,TN,FN)
-
- 
-   print(matthewsCorrelation)
    
-   
-    print(Sys.time())
-
-    print(telcoTrain)
-
-    print(confusionMat)
- 
-    plot(rocVal)
-   
-  #using nnet
-  # system.time(
-  #   telcoTrain <- caret::train(
-  #     ChurnYes~.,
-  #     data = trainingData,
-  #     method = "nnet",
-  #     linear.output = TRUE,
-  #     maxit=150,
-  #     tuneGrid=expand.grid(.size=c(1,5,10),.decay=c(0,0.001,0.1)) , # cannot pass parameter hidden directly!!
-  #     trControl = kControl
-  #   )
-  # )
-  
-
-   
-   
-  #nueralNet
-
-  
-  #confusion Matrix section
-   
-   # predictTelco<- predict(telcoTrain,newdata=testing)
-   # 
-   # confMat<-confusionMatrix(data=predictTelco,testing$ChurnYes)
-   
-   #print(confMat)
-   
-   # p_class<-ifelse(predictTelco>0.50,"M","R")
-   # table(p_class)
-   # print(p_class)
-   
-   #Size-number of units in the hidden layer. Can be zero if there are skip-layer units.
-   
-   
-   #using neuralnet
-   # system.time(
-   #   telcoTrain1 <- caret::train(
-   #     ChurnYes~.,
-   #     data = trainingData,
-   #     threshold = 0.1,
-   #     stepmax = 1e+05,
-   #     method = "neuralnet",
-   #     linear.output = TRUE,
-   #     tuneGrid = data.frame(layer1 = 2:3, layer2 = 0, layer3 = 0),
-   #     trControl = kControl
-   #   )
-   # )
-   # 
-   #  print(telcoTrain1)
-   # 
-   #  plot(telcoTrain1)
   
     sink(file = paste("NN.txt"), append = T)
+    
+    cat("NeuralNet")
+    cat("\n")
+    cat("\n")
+    
+    cat("\n")
+    cat("Model Output:")
+    print(telcoTrain$results)
+    cat("\n")
+    
+    cat("\n")
+    cat("threshold:")
+    cat(bestThreshold)
+    cat("\n")
+    
+    cat("\n")
+    cat("auc:")
+    cat(auc)
+    cat("\n")
+    
+    #Matthews correlation coefficient
+    cat("\n")
+    cat("mcc:")
+    cat(matthewsCorrelation)
+    cat("\n")
+    
+    cat("\n")
+    cat("Confusion Matrix:")
+    print(confusionMat)
     
     sink(file = NULL)
   
