@@ -102,6 +102,26 @@ createMcc <- function(model, testingData, confusionMat) {
   return(mccResult)
 }
 
+determineTheChurnRecords <- function(model,testingData,bestThreshold){
+  set.seed(100)
+  #probability of the records churning
+  pred <- predict(model, type = "prob", newdata = testingData)
+  #bind the proabblities to the testing data
+  testingWithChurn <- cbind(testingData,pred[,2])
+  #remove ChurnYes as want to use proability and not actual
+  #remove the index
+  testingWithChurn <- subset(testingWithChurn, select=-c(ChurnYes))
+  testingWithChurn <- subset(testingWithChurn, select=-c(X))
+  #rename column with proability to Churn 
+  names(testingWithChurn)[names(testingWithChurn) == "pred[, 2]"] <- "Churn"
+  
+  #find of the records which ones will churn
+  whichRecordsChurnRows <- which(testingWithChurn$Churn >= bestThreshold)
+  whichRecordsChurn <- testingWithChurn[whichRecordsChurnRows,]
+  
+  return(whichRecordsChurn)
+}
+
 buildRandomForest <- function(){
   
   dataset <- readDataset(DATA_FILE, KEY_COLUMN)
@@ -120,7 +140,6 @@ buildRandomForest <- function(){
   mcc <- createMcc(model, testingData,confusionMatrix)
   
   importantVariables <- caret::varImp(model)
-  
   
   sink(file = paste("randomF.txt"), append = T)
   
@@ -179,6 +198,9 @@ buildRandomForest <- function(){
   
   
   sink(file = NULL)
+  
+  determineTheChurnRecords(model,testingData,bestThreshold)
+  
 }
 
 buildRandomForest()

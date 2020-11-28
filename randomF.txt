@@ -77,3 +77,1188 @@ StreamingTVYes                  6.366
 PartnerYes                      4.810
 StreamingMoviesYes              4.770
 OnlineBackupYes                 4.203
+Random Forest
+
+
+-------Model Result-------
+  mtry  Accuracy     Kappa  AccuracySD    KappaSD
+1    2 0.7671184 0.5342368 0.025722144 0.05144429
+2    7 0.7485735 0.4971469 0.006556625 0.01311325
+3   13 0.7475036 0.4950071 0.008069692 0.01613938
+4   19 0.7435806 0.4871612 0.008574048 0.01714810
+5   25 0.7417974 0.4835949 0.010087115 0.02017423
+
+
+----Class Probability Results----
+[1] 0.696 0.058 0.520 0.040 0.970 0.974
+
+
+-------Confusion Matrix-------
+Confusion Matrix and Statistics
+
+          Reference
+Prediction   0   1
+         0 914  84
+         1 376 383
+                                         
+               Accuracy : 0.7382         
+                 95% CI : (0.717, 0.7586)
+    No Information Rate : 0.7342         
+    P-Value [Acc > NIR] : 0.3642         
+                                         
+                  Kappa : 0.4407         
+                                         
+ Mcnemar's Test P-Value : <2e-16         
+                                         
+            Sensitivity : 0.8201         
+            Specificity : 0.7085         
+         Pos Pred Value : 0.5046         
+         Neg Pred Value : 0.9158         
+             Prevalence : 0.2658         
+         Detection Rate : 0.2180         
+   Detection Prevalence : 0.4320         
+      Balanced Accuracy : 0.7643         
+                                         
+       'Positive' Class : 1              
+                                         
+
+
+-------Evaluation-------
+Threshold: 0.525
+
+AUC: 0.8368275
+
+MCC Result: 0.4714547
+
+-----Variable Importance------
+rf variable importance
+
+  only 20 most important variables shown (out of 25)
+
+                              Overall
+tenure                        100.000
+TotalCharges                   82.475
+ContractMonth.to.month         80.801
+MonthlyCharges                 73.195
+X                              46.923
+ContractTwo.year               45.195
+InternetServiceFiber.optic     39.751
+PaymentMethodElectronic.check  29.698
+InternetServiceNo              20.257
+ContractOne.year               16.417
+OnlineSecurityYes              14.764
+PaperlessBillingYes            12.438
+TechSupportYes                 11.432
+OnlineSecurityNo               11.106
+InternetServiceDSL              9.228
+DependentsYes                   8.435
+StreamingTVYes                  6.366
+PartnerYes                      4.810
+StreamingMoviesYes              4.770
+OnlineBackupYes                 4.203
+Random Forest
+
+
+-------Model Result-------
+  mtry  Accuracy     Kappa  AccuracySD    KappaSD
+1    2 0.7728245 0.5456491 0.008574048 0.01714810
+2    7 0.7660485 0.5320970 0.008069692 0.01613938
+3   13 0.7614123 0.5228245 0.008574048 0.01714810
+4   19 0.7571327 0.5142653 0.006556625 0.01311325
+5   25 0.7507133 0.5014265 0.005547913 0.01109583
+
+
+----Class Probability Results----
+[1] 0.704 0.032 0.746 0.052 0.976 0.986
+
+
+-------Confusion Matrix-------
+Confusion Matrix and Statistics
+
+          Reference
+Prediction   0   1
+         0 895  98
+         1 395 369
+                                          
+               Accuracy : 0.7194          
+                 95% CI : (0.6978, 0.7403)
+    No Information Rate : 0.7342          
+    P-Value [Acc > NIR] : 0.9232          
+                                          
+                  Kappa : 0.4023          
+                                          
+ Mcnemar's Test P-Value : <2e-16          
+                                          
+            Sensitivity : 0.7901          
+            Specificity : 0.6938          
+         Pos Pred Value : 0.4830          
+         Neg Pred Value : 0.9013          
+             Prevalence : 0.2658          
+         Detection Rate : 0.2100          
+   Detection Prevalence : 0.4348          
+      Balanced Accuracy : 0.7420          
+                                          
+       'Positive' Class : 1               
+                                          
+
+
+-------Evaluation-------
+Threshold: 0.597
+
+AUC: 0.8246219
+
+MCC Result: 0.4312519
+
+-----Variable Importance------
+rf variable importance
+
+  only 20 most important variables shown (out of 25)
+
+                                     Overall
+tenure                               100.000
+MonthlyCharges                        81.861
+ContractMonth.to.month                81.016
+TotalCharges                          78.709
+X                                     41.333
+InternetServiceFiber.optic            38.401
+ContractTwo.year                      34.469
+PaymentMethodElectronic.check         30.328
+InternetServiceNo                     27.659
+ContractOne.year                      21.028
+PaperlessBillingYes                   13.285
+TechSupportYes                        11.781
+OnlineSecurityNo                       8.996
+OnlineSecurityYes                      8.156
+InternetServiceDSL                     7.827
+PaymentMethodCredit.card..automatic.   6.066
+PartnerYes                             5.079
+StreamingTVYes                         4.008
+OnlineBackupYes                        3.711
+StreamingMoviesYes                     3.705
+Random Forest
+
+
+-------Model Result-------
+  mtry  Accuracy     Kappa   AccuracySD     KappaSD
+1    2 0.7500000 0.5000000 0.0116001826 0.023200365
+2    7 0.7407275 0.4814551 0.0035304903 0.007060981
+3   13 0.7346648 0.4693295 0.0020174231 0.004034846
+4   19 0.7314551 0.4629101 0.0005043558 0.001008712
+5   25 0.7271755 0.4543509 0.0015130673 0.003026135
+
+
+----Class Probability Results----
+[1] 0.896 0.064 0.784 0.130 0.990 0.964
+
+
+-------Confusion Matrix-------
+Confusion Matrix and Statistics
+
+          Reference
+Prediction   0   1
+         0 949  88
+         1 341 379
+                                         
+               Accuracy : 0.7558         
+                 95% CI : (0.735, 0.7758)
+    No Information Rate : 0.7342         
+    P-Value [Acc > NIR] : 0.02073        
+                                         
+                  Kappa : 0.4666         
+                                         
+ Mcnemar's Test P-Value : < 2e-16        
+                                         
+            Sensitivity : 0.8116         
+            Specificity : 0.7357         
+         Pos Pred Value : 0.5264         
+         Neg Pred Value : 0.9151         
+             Prevalence : 0.2658         
+         Detection Rate : 0.2157         
+   Detection Prevalence : 0.4098         
+      Balanced Accuracy : 0.7736         
+                                         
+       'Positive' Class : 1              
+                                         
+
+
+-------Evaluation-------
+Threshold: 0.509
+
+AUC: 0.8466162
+
+MCC Result: 0.4915427
+
+-----Variable Importance------
+rf variable importance
+
+  only 20 most important variables shown (out of 25)
+
+                                     Overall
+tenure                               100.000
+TotalCharges                          80.933
+MonthlyCharges                        79.086
+ContractMonth.to.month                74.401
+X                                     44.195
+ContractTwo.year                      43.733
+InternetServiceFiber.optic            39.428
+PaymentMethodElectronic.check         26.353
+InternetServiceNo                     25.144
+PaperlessBillingYes                   12.657
+ContractOne.year                      11.537
+TechSupportYes                        10.518
+DependentsYes                          8.589
+OnlineSecurityYes                      7.199
+InternetServiceDSL                     6.723
+OnlineSecurityNo                       6.262
+SeniorCitizen                          5.699
+StreamingTVYes                         5.276
+StreamingMoviesYes                     4.930
+PaymentMethodCredit.card..automatic.   4.911
+Random Forest
+
+
+-------Model Result-------
+  mtry  Accuracy     Kappa  AccuracySD    KappaSD
+1    2 0.7560628 0.5121255 0.027235211 0.05447042
+2    7 0.7475036 0.4950071 0.007060981 0.01412196
+3   13 0.7393010 0.4786020 0.009582760 0.01916552
+4   19 0.7371612 0.4743224 0.016643740 0.03328748
+5   25 0.7328816 0.4657632 0.014626317 0.02925263
+
+
+----Class Probability Results----
+[1] 0.678 0.044 0.662 0.118 0.974 0.960
+
+
+-------Confusion Matrix-------
+Confusion Matrix and Statistics
+
+          Reference
+Prediction   0   1
+         0 971 100
+         1 319 367
+                                          
+               Accuracy : 0.7615          
+                 95% CI : (0.7409, 0.7813)
+    No Information Rate : 0.7342          
+    P-Value [Acc > NIR] : 0.004796        
+                                          
+                  Kappa : 0.4685          
+                                          
+ Mcnemar's Test P-Value : < 2.2e-16       
+                                          
+            Sensitivity : 0.7859          
+            Specificity : 0.7527          
+         Pos Pred Value : 0.5350          
+         Neg Pred Value : 0.9066          
+             Prevalence : 0.2658          
+         Detection Rate : 0.2089          
+   Detection Prevalence : 0.3904          
+      Balanced Accuracy : 0.7693          
+                                          
+       'Positive' Class : 1               
+                                          
+
+
+-------Evaluation-------
+Threshold: 0.483
+
+AUC: 0.8443579
+
+MCC Result: 0.4876936
+
+-----Variable Importance------
+rf variable importance
+
+  only 20 most important variables shown (out of 25)
+
+                                     Overall
+ContractMonth.to.month               100.000
+tenure                                93.698
+MonthlyCharges                        85.865
+TotalCharges                          81.756
+ContractTwo.year                      46.027
+X                                     44.845
+InternetServiceFiber.optic            34.274
+PaymentMethodElectronic.check         33.813
+InternetServiceNo                     27.791
+PaperlessBillingYes                   21.659
+ContractOne.year                      14.231
+OnlineSecurityNo                      12.207
+TechSupportYes                        11.647
+OnlineSecurityYes                     10.480
+DependentsYes                          9.157
+InternetServiceDSL                     8.893
+PaymentMethodCredit.card..automatic.   5.747
+StreamingMoviesYes                     5.093
+SeniorCitizen                          4.940
+PartnerYes                             4.768
+Random Forest
+
+
+-------Model Result-------
+  mtry  Accuracy     Kappa AccuracySD    KappaSD
+1    2 0.7532097 0.5064194 0.02219165 0.04438331
+2    7 0.7364479 0.4728959 0.01160018 0.02320037
+3   13 0.7360913 0.4721826 0.01916552 0.03833104
+4   19 0.7350214 0.4700428 0.02168730 0.04337460
+5   25 0.7353780 0.4707561 0.01109583 0.02219165
+
+
+----Class Probability Results----
+[1] 0.692 0.068 0.820 0.040 0.952 0.972
+
+
+-------Confusion Matrix-------
+Confusion Matrix and Statistics
+
+          Reference
+Prediction   0   1
+         0 934  85
+         1 356 382
+                                         
+               Accuracy : 0.749          
+                 95% CI : (0.728, 0.7691)
+    No Information Rate : 0.7342         
+    P-Value [Acc > NIR] : 0.08363        
+                                         
+                  Kappa : 0.4574         
+                                         
+ Mcnemar's Test P-Value : < 2e-16        
+                                         
+            Sensitivity : 0.8180         
+            Specificity : 0.7240         
+         Pos Pred Value : 0.5176         
+         Neg Pred Value : 0.9166         
+             Prevalence : 0.2658         
+         Detection Rate : 0.2174         
+   Detection Prevalence : 0.4200         
+      Balanced Accuracy : 0.7710         
+                                         
+       'Positive' Class : 1              
+                                         
+
+
+-------Evaluation-------
+Threshold: 0.504
+
+AUC: 0.8504855
+
+MCC Result: 0.485123
+
+-----Variable Importance------
+rf variable importance
+
+  only 20 most important variables shown (out of 25)
+
+                              Overall
+tenure                        100.000
+ContractMonth.to.month         86.619
+TotalCharges                   85.260
+MonthlyCharges                 82.289
+X                              46.346
+ContractTwo.year               41.310
+InternetServiceFiber.optic     35.855
+PaymentMethodElectronic.check  23.938
+InternetServiceNo              22.594
+PaperlessBillingYes            15.285
+ContractOne.year               12.373
+TechSupportYes                  8.985
+OnlineSecurityNo                8.318
+OnlineSecurityYes               8.054
+InternetServiceDSL              7.661
+OnlineBackupYes                 5.197
+PartnerYes                      5.058
+DependentsYes                   4.773
+StreamingMoviesYes              4.104
+StreamingTVYes                  4.065
+Random Forest
+
+
+-------Model Result-------
+  mtry  Accuracy     Kappa   AccuracySD     KappaSD
+1    2 0.7564194 0.5128388 0.0095827595 0.019165519
+2    7 0.7471469 0.4942939 0.0005043558 0.001008712
+3   13 0.7442939 0.4885877 0.0065566249 0.013113250
+4   19 0.7450071 0.4900143 0.0095827595 0.019165519
+5   25 0.7396576 0.4793153 0.0100871153 0.020174231
+
+
+----Class Probability Results----
+[1] 0.848 0.030 0.672 0.042 0.960 0.970
+
+
+-------Confusion Matrix-------
+Confusion Matrix and Statistics
+
+          Reference
+Prediction   0   1
+         0 922  96
+         1 368 371
+                                          
+               Accuracy : 0.7359          
+                 95% CI : (0.7146, 0.7564)
+    No Information Rate : 0.7342          
+    P-Value [Acc > NIR] : 0.4479          
+                                          
+                  Kappa : 0.4294          
+                                          
+ Mcnemar's Test P-Value : <2e-16          
+                                          
+            Sensitivity : 0.7944          
+            Specificity : 0.7147          
+         Pos Pred Value : 0.5020          
+         Neg Pred Value : 0.9057          
+             Prevalence : 0.2658          
+         Detection Rate : 0.2112          
+   Detection Prevalence : 0.4206          
+      Balanced Accuracy : 0.7546          
+                                          
+       'Positive' Class : 1               
+                                          
+
+
+-------Evaluation-------
+Threshold: 0.596
+
+AUC: 0.8393282
+
+MCC Result: 0.4556302
+
+-----Variable Importance------
+rf variable importance
+
+  only 20 most important variables shown (out of 25)
+
+                              Overall
+tenure                        100.000
+TotalCharges                   84.509
+ContractMonth.to.month         84.110
+MonthlyCharges                 75.154
+ContractTwo.year               47.897
+X                              43.862
+InternetServiceFiber.optic     36.821
+PaymentMethodElectronic.check  34.201
+InternetServiceNo              19.735
+ContractOne.year               12.265
+PaperlessBillingYes            11.890
+OnlineSecurityNo                8.755
+OnlineSecurityYes               7.843
+InternetServiceDSL              6.039
+DependentsYes                   4.903
+TechSupportYes                  4.785
+StreamingMoviesYes              3.430
+OnlineBackupYes                 3.356
+PartnerYes                      3.103
+SeniorCitizen                   3.083
+Random Forest
+
+
+-------Model Result-------
+  mtry  Accuracy     Kappa AccuracySD    KappaSD
+1    2 0.7696148 0.5392297 0.01008712 0.02017423
+2    7 0.7653352 0.5306705 0.02420908 0.04841815
+3   13 0.7617689 0.5235378 0.01412196 0.02824392
+4   19 0.7578459 0.5156919 0.01361761 0.02723521
+5   25 0.7557061 0.5114123 0.01260889 0.02521779
+
+
+----Class Probability Results----
+[1] 0.860 0.064 0.792 0.038 0.978 0.974
+
+
+-------Confusion Matrix-------
+Confusion Matrix and Statistics
+
+          Reference
+Prediction   0   1
+         0 948 101
+         1 342 366
+                                         
+               Accuracy : 0.7479         
+                 95% CI : (0.7269, 0.768)
+    No Information Rate : 0.7342         
+    P-Value [Acc > NIR] : 0.1017         
+                                         
+                  Kappa : 0.4453         
+                                         
+ Mcnemar's Test P-Value : <2e-16         
+                                         
+            Sensitivity : 0.7837         
+            Specificity : 0.7349         
+         Pos Pred Value : 0.5169         
+         Neg Pred Value : 0.9037         
+             Prevalence : 0.2658         
+         Detection Rate : 0.2083         
+   Detection Prevalence : 0.4030         
+      Balanced Accuracy : 0.7593         
+                                         
+       'Positive' Class : 1              
+                                         
+
+
+-------Evaluation-------
+Threshold: 0.594
+
+AUC: 0.8340239
+
+MCC Result: 0.4670781
+
+-----Variable Importance------
+rf variable importance
+
+  only 20 most important variables shown (out of 25)
+
+                              Overall
+tenure                        100.000
+TotalCharges                   83.938
+ContractMonth.to.month         81.098
+MonthlyCharges                 78.793
+InternetServiceFiber.optic     42.966
+ContractTwo.year               41.917
+X                              39.989
+PaymentMethodElectronic.check  35.803
+InternetServiceNo              26.473
+PaperlessBillingYes            12.973
+ContractOne.year               12.920
+TechSupportYes                 12.767
+OnlineSecurityNo                8.502
+InternetServiceDSL              7.458
+OnlineSecurityYes               6.840
+DependentsYes                   4.230
+PartnerYes                      4.228
+SeniorCitizen                   4.156
+StreamingMoviesYes              2.308
+OnlineBackupYes                 2.175
+Random Forest
+
+
+-------Model Result-------
+  mtry  Accuracy     Kappa  AccuracySD     KappaSD
+1    2 0.7649786 0.5299572 0.001513067 0.003026135
+2    7 0.7567760 0.5135521 0.003026135 0.006052269
+3   13 0.7528531 0.5057061 0.002521779 0.005043558
+4   19 0.7539230 0.5078459 0.001008712 0.002017423
+5   25 0.7489301 0.4978602 0.005043558 0.010087115
+
+
+----Class Probability Results----
+[1] 0.896 0.030 0.776 0.074 0.974 0.942
+
+
+-------Confusion Matrix-------
+Confusion Matrix and Statistics
+
+          Reference
+Prediction   0   1
+         0 914  84
+         1 376 383
+                                         
+               Accuracy : 0.7382         
+                 95% CI : (0.717, 0.7586)
+    No Information Rate : 0.7342         
+    P-Value [Acc > NIR] : 0.3642         
+                                         
+                  Kappa : 0.4407         
+                                         
+ Mcnemar's Test P-Value : <2e-16         
+                                         
+            Sensitivity : 0.8201         
+            Specificity : 0.7085         
+         Pos Pred Value : 0.5046         
+         Neg Pred Value : 0.9158         
+             Prevalence : 0.2658         
+         Detection Rate : 0.2180         
+   Detection Prevalence : 0.4320         
+      Balanced Accuracy : 0.7643         
+                                         
+       'Positive' Class : 1              
+                                         
+
+
+-------Evaluation-------
+Threshold: 0.615
+
+AUC: 0.842429
+
+MCC Result: 0.4714547
+
+-----Variable Importance------
+rf variable importance
+
+  only 20 most important variables shown (out of 25)
+
+                              Overall
+tenure                        100.000
+MonthlyCharges                 81.988
+TotalCharges                   78.802
+ContractMonth.to.month         70.717
+ContractTwo.year               40.296
+X                              40.041
+InternetServiceFiber.optic     39.440
+PaymentMethodElectronic.check  29.773
+InternetServiceNo              24.553
+PaperlessBillingYes            14.002
+InternetServiceDSL             10.216
+ContractOne.year                8.620
+TechSupportYes                  8.080
+DependentsYes                   6.080
+OnlineBackupYes                 4.881
+StreamingMoviesYes              4.832
+OnlineSecurityYes               4.796
+StreamingTVYes                  3.937
+OnlineSecurityNo                3.775
+PartnerYes                      3.157
+Random Forest
+
+
+-------Model Result-------
+  mtry  Accuracy     Kappa   AccuracySD     KappaSD
+1    2 0.7528531 0.5057061 0.0015130673 0.003026135
+2    7 0.7382311 0.4764622 0.0040348461 0.008069692
+3   13 0.7325250 0.4650499 0.0000000000 0.000000000
+4   19 0.7335949 0.4671897 0.0055479134 0.011095827
+5   25 0.7293153 0.4586305 0.0005043558 0.001008712
+
+
+----Class Probability Results----
+[1] 0.678 0.036 0.606 0.072 0.984 0.964
+
+
+-------Confusion Matrix-------
+Confusion Matrix and Statistics
+
+          Reference
+Prediction   0   1
+         0 913  85
+         1 377 382
+                                          
+               Accuracy : 0.7371          
+                 95% CI : (0.7158, 0.7575)
+    No Information Rate : 0.7342          
+    P-Value [Acc > NIR] : 0.4055          
+                                          
+                  Kappa : 0.4383          
+                                          
+ Mcnemar's Test P-Value : <2e-16          
+                                          
+            Sensitivity : 0.8180          
+            Specificity : 0.7078          
+         Pos Pred Value : 0.5033          
+         Neg Pred Value : 0.9148          
+             Prevalence : 0.2658          
+         Detection Rate : 0.2174          
+   Detection Prevalence : 0.4320          
+      Balanced Accuracy : 0.7629          
+                                          
+       'Positive' Class : 1               
+                                          
+
+
+-------Evaluation-------
+Threshold: 0.479
+
+AUC: 0.84239
+
+MCC Result: 0.4688538
+
+-----Variable Importance------
+rf variable importance
+
+  only 20 most important variables shown (out of 25)
+
+                                     Overall
+tenure                               100.000
+TotalCharges                          81.658
+MonthlyCharges                        80.589
+ContractMonth.to.month                72.667
+ContractTwo.year                      51.378
+X                                     44.560
+InternetServiceFiber.optic            36.181
+PaymentMethodElectronic.check         31.751
+InternetServiceNo                     23.495
+PaperlessBillingYes                   15.688
+ContractOne.year                      12.275
+TechSupportYes                         8.066
+OnlineSecurityYes                      7.715
+InternetServiceDSL                     7.666
+OnlineSecurityNo                       7.119
+PaymentMethodCredit.card..automatic.   5.691
+PartnerYes                             4.209
+DependentsYes                          4.043
+StreamingTVYes                         2.964
+OnlineBackupYes                        2.624
+Random Forest
+
+
+-------Model Result-------
+  mtry  Accuracy     Kappa AccuracySD    KappaSD
+1    2 0.7549929 0.5099857 0.02067859 0.04135717
+2    7 0.7407275 0.4814551 0.00958276 0.01916552
+3   13 0.7407275 0.4814551 0.01361761 0.02723521
+4   19 0.7396576 0.4793153 0.01008712 0.02017423
+5   25 0.7375178 0.4750357 0.01210454 0.02420908
+
+
+----Class Probability Results----
+[1] 0.862 0.026 0.774 0.026 0.978 0.970
+
+
+-------Confusion Matrix-------
+Confusion Matrix and Statistics
+
+          Reference
+Prediction   0   1
+         0 933  90
+         1 357 377
+                                          
+               Accuracy : 0.7456          
+                 95% CI : (0.7245, 0.7658)
+    No Information Rate : 0.7342          
+    P-Value [Acc > NIR] : 0.146           
+                                          
+                  Kappa : 0.4487          
+                                          
+ Mcnemar's Test P-Value : <2e-16          
+                                          
+            Sensitivity : 0.8073          
+            Specificity : 0.7233          
+         Pos Pred Value : 0.5136          
+         Neg Pred Value : 0.9120          
+             Prevalence : 0.2658          
+         Detection Rate : 0.2146          
+   Detection Prevalence : 0.4178          
+      Balanced Accuracy : 0.7653          
+                                          
+       'Positive' Class : 1               
+                                          
+
+
+-------Evaluation-------
+Threshold: 0.511
+
+AUC: 0.8449405
+
+MCC Result: 0.4752067
+
+-----Variable Importance------
+rf variable importance
+
+  only 20 most important variables shown (out of 25)
+
+                              Overall
+tenure                        100.000
+ContractMonth.to.month         96.104
+TotalCharges                   81.337
+MonthlyCharges                 78.273
+ContractTwo.year               52.395
+X                              48.259
+InternetServiceFiber.optic     41.913
+PaymentMethodElectronic.check  33.169
+InternetServiceNo              21.440
+PaperlessBillingYes            17.155
+ContractOne.year               17.044
+TechSupportYes                 15.083
+OnlineSecurityNo               13.062
+InternetServiceDSL             10.410
+DependentsYes                   9.825
+OnlineSecurityYes               9.279
+PartnerYes                      8.515
+OnlineBackupYes                 7.134
+SeniorCitizen                   6.856
+StreamingMoviesYes              6.365
+Random Forest
+
+
+-------Model Result-------
+  mtry  Accuracy     Kappa   AccuracySD     KappaSD
+1    2 0.7596291 0.5192582 0.0050435576 0.010087115
+2    7 0.7539230 0.5078459 0.0000000000 0.000000000
+3   13 0.7482168 0.4964337 0.0020174231 0.004034846
+4   19 0.7485735 0.4971469 0.0005043558 0.001008712
+5   25 0.7464337 0.4928673 0.0035304903 0.007060981
+
+
+----Class Probability Results----
+[1] 0.676 0.034 0.754 0.092 0.982 0.966
+
+
+-------Confusion Matrix-------
+Confusion Matrix and Statistics
+
+          Reference
+Prediction   0   1
+         0 912  89
+         1 378 378
+                                          
+               Accuracy : 0.7342          
+                 95% CI : (0.7129, 0.7547)
+    No Information Rate : 0.7342          
+    P-Value [Acc > NIR] : 0.5125          
+                                          
+                  Kappa : 0.4313          
+                                          
+ Mcnemar's Test P-Value : <2e-16          
+                                          
+            Sensitivity : 0.8094          
+            Specificity : 0.7070          
+         Pos Pred Value : 0.5000          
+         Neg Pred Value : 0.9111          
+             Prevalence : 0.2658          
+         Detection Rate : 0.2151          
+   Detection Prevalence : 0.4303          
+      Balanced Accuracy : 0.7582          
+                                          
+       'Positive' Class : 1               
+                                          
+
+
+-------Evaluation-------
+Threshold: 0.531
+
+AUC: 0.8349003
+
+MCC Result: 0.4607448
+
+-----Variable Importance------
+rf variable importance
+
+  only 20 most important variables shown (out of 25)
+
+                              Overall
+tenure                        100.000
+TotalCharges                   88.417
+MonthlyCharges                 84.301
+ContractMonth.to.month         72.983
+InternetServiceFiber.optic     45.193
+X                              43.206
+ContractTwo.year               43.121
+PaymentMethodElectronic.check  20.927
+InternetServiceNo              18.093
+PaperlessBillingYes            15.737
+ContractOne.year               13.619
+TechSupportYes                  8.573
+OnlineSecurityYes               6.961
+InternetServiceDSL              6.668
+OnlineSecurityNo                5.238
+StreamingMoviesYes              4.761
+DependentsYes                   4.131
+PartnerYes                      3.629
+OnlineBackupYes                 3.368
+StreamingTVYes                  2.316
+Random Forest
+
+
+-------Model Result-------
+  mtry  Accuracy     Kappa AccuracySD    KappaSD
+1    2 0.7510699 0.5021398 0.02420908 0.04841815
+2    7 0.7410842 0.4821683 0.03026135 0.06052269
+3   13 0.7389444 0.4778887 0.02420908 0.04841815
+4   19 0.7332382 0.4664765 0.02118294 0.04236588
+5   25 0.7296719 0.4593438 0.02219165 0.04438331
+
+
+----Class Probability Results----
+[1] 0.906 0.030 0.790 0.038 0.984 0.972
+
+
+-------Confusion Matrix-------
+Confusion Matrix and Statistics
+
+          Reference
+Prediction   0   1
+         0 935  95
+         1 355 372
+                                          
+               Accuracy : 0.7439          
+                 95% CI : (0.7228, 0.7642)
+    No Information Rate : 0.7342          
+    P-Value [Acc > NIR] : 0.1867          
+                                          
+                  Kappa : 0.4427          
+                                          
+ Mcnemar's Test P-Value : <2e-16          
+                                          
+            Sensitivity : 0.7966          
+            Specificity : 0.7248          
+         Pos Pred Value : 0.5117          
+         Neg Pred Value : 0.9078          
+             Prevalence : 0.2658          
+         Detection Rate : 0.2117          
+   Detection Prevalence : 0.4138          
+      Balanced Accuracy : 0.7607          
+                                          
+       'Positive' Class : 1               
+                                          
+
+
+-------Evaluation-------
+Threshold: 0.565
+
+AUC: 0.8472694
+
+MCC Result: 0.467651
+
+-----Variable Importance------
+rf variable importance
+
+  only 20 most important variables shown (out of 25)
+
+                              Overall
+tenure                        100.000
+MonthlyCharges                 85.206
+TotalCharges                   81.298
+ContractMonth.to.month         77.998
+ContractTwo.year               46.831
+X                              45.715
+InternetServiceFiber.optic     39.603
+PaymentMethodElectronic.check  29.947
+InternetServiceNo              23.351
+PaperlessBillingYes            13.218
+ContractOne.year               11.956
+TechSupportYes                 11.022
+OnlineSecurityNo                9.150
+OnlineSecurityYes               8.524
+InternetServiceDSL              6.938
+DependentsYes                   5.126
+PartnerYes                      4.441
+StreamingMoviesYes              3.522
+OnlineBackupYes                 3.204
+StreamingTVYes                  3.063
+Random Forest
+
+
+-------Model Result-------
+  mtry  Accuracy     Kappa  AccuracySD     KappaSD
+1    2 0.7674750 0.5349501 0.008069692 0.016139384
+2    7 0.7567760 0.5135521 0.003026135 0.006052269
+3   13 0.7528531 0.5057061 0.005547913 0.011095827
+4   19 0.7510699 0.5021398 0.002017423 0.004034846
+5   25 0.7457204 0.4914408 0.006556625 0.013113250
+
+
+----Class Probability Results----
+[1] 0.664 0.054 0.538 0.108 0.984 0.982
+
+
+-------Confusion Matrix-------
+Confusion Matrix and Statistics
+
+          Reference
+Prediction   0   1
+         0 941  98
+         1 349 369
+                                          
+               Accuracy : 0.7456          
+                 95% CI : (0.7245, 0.7658)
+    No Information Rate : 0.7342          
+    P-Value [Acc > NIR] : 0.146           
+                                          
+                  Kappa : 0.4436          
+                                          
+ Mcnemar's Test P-Value : <2e-16          
+                                          
+            Sensitivity : 0.7901          
+            Specificity : 0.7295          
+         Pos Pred Value : 0.5139          
+         Neg Pred Value : 0.9057          
+             Prevalence : 0.2658          
+         Detection Rate : 0.2100          
+   Detection Prevalence : 0.4087          
+      Balanced Accuracy : 0.7598          
+                                          
+       'Positive' Class : 1               
+                                          
+
+
+-------Evaluation-------
+Threshold: 0.489
+
+AUC: 0.8339118
+
+MCC Result: 0.4669372
+
+-----Variable Importance------
+rf variable importance
+
+  only 20 most important variables shown (out of 25)
+
+                                     Overall
+tenure                               100.000
+MonthlyCharges                        86.330
+ContractMonth.to.month                82.329
+TotalCharges                          80.855
+ContractTwo.year                      60.584
+InternetServiceFiber.optic            47.248
+X                                     43.060
+PaymentMethodElectronic.check         32.135
+InternetServiceNo                     27.903
+PaperlessBillingYes                   13.699
+ContractOne.year                      11.381
+OnlineSecurityNo                      10.853
+OnlineSecurityYes                     10.752
+TechSupportYes                        10.082
+InternetServiceDSL                     8.488
+PartnerYes                             6.210
+SeniorCitizen                          6.123
+DependentsYes                          5.691
+OnlineBackupYes                        5.570
+PaymentMethodCredit.card..automatic.   4.128
+Random Forest
+
+
+-------Model Result-------
+  mtry  Accuracy     Kappa AccuracySD     KappaSD
+1    2 0.7642653 0.5285307 0.00353049 0.007060981
+2    7 0.7503566 0.5007133 0.02118294 0.042365884
+3   13 0.7364479 0.4728959 0.01966987 0.039339750
+4   19 0.7328816 0.4657632 0.02673086 0.053461711
+5   25 0.7303852 0.4607703 0.02521779 0.050435576
+
+
+----Class Probability Results----
+[1] 0.664 0.028 0.744 0.070 0.956 0.976
+
+
+-------Confusion Matrix-------
+Confusion Matrix and Statistics
+
+          Reference
+Prediction   0   1
+         0 942 102
+         1 348 365
+                                          
+               Accuracy : 0.7439          
+                 95% CI : (0.7228, 0.7642)
+    No Information Rate : 0.7342          
+    P-Value [Acc > NIR] : 0.1867          
+                                          
+                  Kappa : 0.4382          
+                                          
+ Mcnemar's Test P-Value : <2e-16          
+                                          
+            Sensitivity : 0.7816          
+            Specificity : 0.7302          
+         Pos Pred Value : 0.5119          
+         Neg Pred Value : 0.9023          
+             Prevalence : 0.2658          
+         Detection Rate : 0.2077          
+   Detection Prevalence : 0.4058          
+      Balanced Accuracy : 0.7559          
+                                          
+       'Positive' Class : 1               
+                                          
+
+
+-------Evaluation-------
+Threshold: 0.545
+
+AUC: 0.8315174
+
+MCC Result: 0.4604401
+
+-----Variable Importance------
+rf variable importance
+
+  only 20 most important variables shown (out of 25)
+
+                                     Overall
+tenure                               100.000
+ContractMonth.to.month                95.075
+TotalCharges                          84.483
+MonthlyCharges                        80.902
+X                                     47.255
+ContractTwo.year                      44.594
+InternetServiceFiber.optic            38.428
+PaymentMethodElectronic.check         37.785
+InternetServiceNo                     23.708
+ContractOne.year                      20.376
+TechSupportYes                        15.457
+InternetServiceDSL                    10.482
+PaperlessBillingYes                   10.028
+OnlineSecurityYes                      9.124
+OnlineBackupYes                        8.613
+OnlineSecurityNo                       7.788
+PaymentMethodCredit.card..automatic.   6.443
+PartnerYes                             5.037
+StreamingMoviesYes                     4.412
+SeniorCitizen                          3.751
+Random Forest
+
+
+-------Model Result-------
+  mtry  Accuracy     Kappa AccuracySD     KappaSD
+1    2 0.7642653 0.5285307 0.00353049 0.007060981
+2    7 0.7503566 0.5007133 0.02118294 0.042365884
+3   13 0.7364479 0.4728959 0.01966987 0.039339750
+4   19 0.7328816 0.4657632 0.02673086 0.053461711
+5   25 0.7303852 0.4607703 0.02521779 0.050435576
+
+
+----Class Probability Results----
+[1] 0.664 0.028 0.744 0.070 0.956 0.976
+
+
+-------Confusion Matrix-------
+Confusion Matrix and Statistics
+
+          Reference
+Prediction   0   1
+         0 942 102
+         1 348 365
+                                          
+               Accuracy : 0.7439          
+                 95% CI : (0.7228, 0.7642)
+    No Information Rate : 0.7342          
+    P-Value [Acc > NIR] : 0.1867          
+                                          
+                  Kappa : 0.4382          
+                                          
+ Mcnemar's Test P-Value : <2e-16          
+                                          
+            Sensitivity : 0.7816          
+            Specificity : 0.7302          
+         Pos Pred Value : 0.5119          
+         Neg Pred Value : 0.9023          
+             Prevalence : 0.2658          
+         Detection Rate : 0.2077          
+   Detection Prevalence : 0.4058          
+      Balanced Accuracy : 0.7559          
+                                          
+       'Positive' Class : 1               
+                                          
+
+
+-------Evaluation-------
+Threshold: 0.545
+
+AUC: 0.8315174
+
+MCC Result: 0.4604401
+
+-----Variable Importance------
+rf variable importance
+
+  only 20 most important variables shown (out of 25)
+
+                                     Overall
+tenure                               100.000
+ContractMonth.to.month                95.075
+TotalCharges                          84.483
+MonthlyCharges                        80.902
+X                                     47.255
+ContractTwo.year                      44.594
+InternetServiceFiber.optic            38.428
+PaymentMethodElectronic.check         37.785
+InternetServiceNo                     23.708
+ContractOne.year                      20.376
+TechSupportYes                        15.457
+InternetServiceDSL                    10.482
+PaperlessBillingYes                   10.028
+OnlineSecurityYes                      9.124
+OnlineBackupYes                        8.613
+OnlineSecurityNo                       7.788
+PaymentMethodCredit.card..automatic.   6.443
+PartnerYes                             5.037
+StreamingMoviesYes                     4.412
+SeniorCitizen                          3.751
