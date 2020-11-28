@@ -30,7 +30,7 @@ MYLIBRARIES<-c(
 
 main <- function(){
   source("LogisticRegression.R")
-  source("DecisionTree.R")
+  source("DT.R")
   source("RandomForest.R")
   source("nueralNet.R")
 }
