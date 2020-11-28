@@ -20,7 +20,7 @@ CONFUSION_MATRIX_POSITIVE_CLASS <- "1"
 readDataset <- function(datafile, keyColumn){
   dataset<-read.csv(datafile, encoding="UTF-8", stringsAsFactors = FALSE)
   dataset[,keyColumn] = as.factor(dataset[,keyColumn])
-  return(dataset)
+  return( dataset<-subset(dataset, select=-c(X)))
 }
 
 

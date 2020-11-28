@@ -3,15 +3,15 @@ Random Forest
 
 -------Model Result-------
   mtry  Accuracy     Kappa  AccuracySD    KappaSD
-1    2 0.7671184 0.5342368 0.025722144 0.05144429
-2    7 0.7485735 0.4971469 0.006556625 0.01311325
-3   13 0.7475036 0.4950071 0.008069692 0.01613938
-4   19 0.7435806 0.4871612 0.008574048 0.01714810
-5   25 0.7417974 0.4835949 0.010087115 0.02017423
+1    2 0.7660485 0.5320970 0.023200365 0.04640073
+2    7 0.7428673 0.4857347 0.015635029 0.03127006
+3   13 0.7364479 0.4728959 0.012608894 0.02521779
+4   18 0.7371612 0.4743224 0.010591471 0.02118294
+5   24 0.7286020 0.4572040 0.008574048 0.01714810
 
 
 ----Class Probability Results----
-[1] 0.696 0.058 0.520 0.040 0.970 0.974
+[1] 0.764 0.048 0.624 0.024 0.982 0.996
 
 
 -------Confusion Matrix-------
@@ -19,61 +19,61 @@ Confusion Matrix and Statistics
 
           Reference
 Prediction   0   1
-         0 914  84
-         1 376 383
-                                         
-               Accuracy : 0.7382         
-                 95% CI : (0.717, 0.7586)
-    No Information Rate : 0.7342         
-    P-Value [Acc > NIR] : 0.3642         
-                                         
-                  Kappa : 0.4407         
-                                         
- Mcnemar's Test P-Value : <2e-16         
-                                         
-            Sensitivity : 0.8201         
-            Specificity : 0.7085         
-         Pos Pred Value : 0.5046         
-         Neg Pred Value : 0.9158         
-             Prevalence : 0.2658         
-         Detection Rate : 0.2180         
-   Detection Prevalence : 0.4320         
-      Balanced Accuracy : 0.7643         
-                                         
-       'Positive' Class : 1              
-                                         
+         0 919  88
+         1 371 379
+                                          
+               Accuracy : 0.7388          
+                 95% CI : (0.7175, 0.7592)
+    No Information Rate : 0.7342          
+    P-Value [Acc > NIR] : 0.344           
+                                          
+                  Kappa : 0.4391          
+                                          
+ Mcnemar's Test P-Value : <2e-16          
+                                          
+            Sensitivity : 0.8116          
+            Specificity : 0.7124          
+         Pos Pred Value : 0.5053          
+         Neg Pred Value : 0.9126          
+             Prevalence : 0.2658          
+         Detection Rate : 0.2157          
+   Detection Prevalence : 0.4269          
+      Balanced Accuracy : 0.7620          
+                                          
+       'Positive' Class : 1               
+                                          
 
 
 -------Evaluation-------
-Threshold: 0.525
+Threshold: 0.573
 
-AUC :0.8368275
+AUC: 0.8404479
 
-MCC Result: 0.4714547
+MCC Result: 0.4679627
 
 -----Variable Importance------
 rf variable importance
 
-  only 20 most important variables shown (out of 25)
+  only 20 most important variables shown (out of 24)
 
                               Overall
 tenure                        100.000
-TotalCharges                   82.475
-ContractMonth.to.month         80.801
-MonthlyCharges                 73.195
-X                              46.923
-ContractTwo.year               45.195
-InternetServiceFiber.optic     39.751
-PaymentMethodElectronic.check  29.698
-InternetServiceNo              20.257
-ContractOne.year               16.417
-OnlineSecurityYes              14.764
-PaperlessBillingYes            12.438
-TechSupportYes                 11.432
-OnlineSecurityNo               11.106
-InternetServiceDSL              9.228
-DependentsYes                   8.435
-StreamingTVYes                  6.366
-PartnerYes                      4.810
-StreamingMoviesYes              4.770
-OnlineBackupYes                 4.203
+TotalCharges                   81.370
+ContractMonth.to.month         81.161
+MonthlyCharges                 73.239
+ContractTwo.year               36.802
+InternetServiceFiber.optic     34.863
+PaymentMethodElectronic.check  24.263
+InternetServiceNo              17.411
+ContractOne.year               13.757
+OnlineSecurityNo               12.035
+PaperlessBillingYes            11.496
+TechSupportYes                 10.404
+OnlineSecurityYes              10.343
+InternetServiceDSL              8.959
+DependentsYes                   6.792
+StreamingTVYes                  6.044
+StreamingMoviesYes              4.758
+PartnerYes                      4.707
+OnlineBackupYes                 4.188
+DeviceProtectionYes             3.430
