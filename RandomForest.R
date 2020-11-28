@@ -20,7 +20,7 @@ CONFUSION_MATRIX_POSITIVE_CLASS <- "1"
 readDataset <- function(datafile, keyColumn){
   dataset<-read.csv(datafile, encoding="UTF-8", stringsAsFactors = FALSE)
   dataset[,keyColumn] = as.factor(dataset[,keyColumn])
-  return(dataset)
+  return( dataset<-subset(dataset, select=-c(X)))
 }
 
 
@@ -111,7 +111,6 @@ determineTheChurnRecords <- function(model,testingData,bestThreshold){
   #remove ChurnYes as want to use proability and not actual
   #remove the index
   testingWithChurn <- subset(testingWithChurn, select=-c(ChurnYes))
-  testingWithChurn <- subset(testingWithChurn, select=-c(X))
   #rename column with proability to Churn 
   names(testingWithChurn)[names(testingWithChurn) == "pred[, 2]"] <- "Churn"
   
