@@ -265,7 +265,7 @@ DT<-function(){
   
 }
 
-# ************************************************
+# *************************************************
 # This is where R starts execution
 
 # Automatically release memory
