@@ -15,7 +15,6 @@ VALIDATION_METHOD <- "repeatedcv"
 CONFUSION_MATRIX_POSITIVE_CLASS <- "1"
 
 
-
 #Read dataset
 readDataset <- function(datafile, keyColumn){
   dataset<-read.csv(datafile, encoding="UTF-8", stringsAsFactors = FALSE)
@@ -117,8 +116,39 @@ determineTheChurnRecords <- function(model,testingData,bestThreshold){
   #find of the records which ones will churn
   whichRecordsChurnRows <- which(testingWithChurn$Churn >= bestThreshold)
   whichRecordsChurn <- testingWithChurn[whichRecordsChurnRows,]
-  
+
   return(whichRecordsChurn)
+}
+
+determineValuableCustomers <- function(churnCustomers){
+  
+  #tenure 
+  #contract month to month
+  #monthly charges
+  #if they are less than average tenure and have less than average monthly charge 
+  #and on contract month to month let them go 
+  
+  averageTenure <- mean(churnCustomers$tenure)
+  customersLessThanAverageTenure <- churnCustomers[which(churnCustomers$tenure <= averageTenure),]
+  
+  averageMonthlyCharge <- mean(customersLessThanAverageTenure$MonthlyCharges)
+  customersLessThanMonthlyCharge <- customersLessThanAverageTenure[which(customersLessThanAverageTenure$MonthlyCharges <= averageMonthlyCharge),]
+    
+  lowQualityCustomers <- customersLessThanMonthlyCharge[which(customersLessThanMonthlyCharge$ContractMonth.to.month == 1),]
+  
+  meanlowQualityCustomersMonthlyCharge <- mean(lowQualityCustomers$MonthlyCharges)
+  finalCustomersThatWillBeLetGo <- lowQualityCustomers[which(lowQualityCustomers$MonthlyCharges <= meanlowQualityCustomersMonthlyCharge),]
+  
+  valuableCustomers <- churnCustomers[-which(lowQualityCustomers$MonthlyCharges <= meanlowQualityCustomersMonthlyCharge),]
+  
+  print(paste("customers being let go",nrow(finalCustomersThatWillBeLetGo)))
+  print(paste("customers being kept",nrow(valuableCustomers)))
+  
+  return(valuableCustomers) 
+}
+
+discount <- function(x) {
+  return (x * 0.05)
 }
 
 buildRandomForest <- function(){
@@ -194,11 +224,15 @@ buildRandomForest <- function(){
   cat("\n")
   print(importantVariables)
   
-  
-  
   sink(file = NULL)
   
-  determineTheChurnRecords(model,testingData,bestThreshold)
+  churnRecords <- determineTheChurnRecords(model,testingData,bestThreshold)
+  valuableChurn <- determineValuableCustomers(churnRecords)
+  
+  valuableChurn$discount <- lapply(valuableChurn$MonthlyCharges, function(x) sapply(x, discount))
+  costToCompany <- as.data.frame(valuableChurn$discount)
+  
+  print(paste("Cost to the company to keep ",nrow(valuableChurn),"customers - £",rowSums(costToCompany)*12))
   
 }
 
