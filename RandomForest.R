@@ -248,9 +248,9 @@ buildRandomForest <- function(){
   
   valuableChurn$discount <- lapply(valuableChurn$MonthlyCharges, function(x) sapply(x, discount))
   costToCompany <- as.data.frame(valuableChurn$discount)
-                                   
-  unNormalise(MAX = MAX, MIN=MIN, x = rowSums(costToCompany)*12)
-  unStandardise(SD=SD, MEAN=MEAN ,x = rowSums(costToCompany)*12)
+  
+  costToCompany <- unNormalise(MAX = MAX, MIN=MIN, x = costToCompany)
+  costToCompany <- unStandardise(SD=SD, MEAN=MEAN ,x = costToCompany)
   
   print(paste("Cost to the company to keep ",nrow(valuableChurn),"customers - £",rowSums(costToCompany)*12))
   
