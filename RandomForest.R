@@ -14,6 +14,11 @@ P_VALUE <- .75
 VALIDATION_METHOD <- "repeatedcv"
 CONFUSION_MATRIX_POSITIVE_CLASS <- "1"
 
+MAX <-1.793254
+MIN <- -1.547173
+
+MEAN <- 64.79821
+SD <- 30.08597
 
 #Read dataset
 readDataset <- function(datafile, keyColumn){
@@ -21,7 +26,19 @@ readDataset <- function(datafile, keyColumn){
   dataset[,keyColumn] = as.factor(dataset[,keyColumn])
   return( dataset<-subset(dataset, select=-c(X)))
 }
+#un-normalise
+unNormalise<-function(MAX, MIN, x){
+   x<- (x)*(MAX-MIN) + MIN
 
+  return (x)
+}
+# ********************************************************************************
+#unS
+unStandardise<-function(SD,MEAN,x){
+  x<- ((x)*SD)+MEAN
+  
+  return (x)
+}
 
 # Prepare training data
 separateTrainingSet <- function(dataset, pValue, keyColumn){
@@ -231,6 +248,9 @@ buildRandomForest <- function(){
   
   valuableChurn$discount <- lapply(valuableChurn$MonthlyCharges, function(x) sapply(x, discount))
   costToCompany <- as.data.frame(valuableChurn$discount)
+                                   
+  unNormalise(MAX = MAX, MIN=MIN, x = rowSums(costToCompany)*12)
+  unStandardise(SD=SD, MEAN=MEAN ,x = rowSums(costToCompany)*12)
   
   print(paste("Cost to the company to keep ",nrow(valuableChurn),"customers - £",rowSums(costToCompany)*12))
   
