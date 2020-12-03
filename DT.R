@@ -1,5 +1,4 @@
 # ************************************************
-# ************************************************
 # PRACTICAL BUSINESS ANALYTICS
 # COM3018/COMM053
 #
@@ -16,8 +15,7 @@ rm(list=ls())
 # * ***********************************************
 # Global Environment Variables (available to all functions)
 
-
-DATASET <- "newTelco.csv"  # Name of the input dataset csv file
+DATASET <- "newTelcoTest.csv"  # Name of the input dataset csv file
 PREDICTOR <- "ChurnYes"  # Field name of the output class to predict
 
 # Define and then load the libraries used in this project
@@ -44,6 +42,7 @@ myLibraries<-c("caret",
                "assertr")
 
 # User defined functions are next
+
 # ************************************************
 # pruneTree() :
 #
@@ -265,7 +264,7 @@ DT<-function(){
   
 }
 
-# *************************************************
+# ************************************************
 # This is where R starts execution
 
 # Automatically release memory
