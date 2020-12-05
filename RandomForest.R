@@ -118,7 +118,20 @@ createMcc <- function(model, testingData, confusionMat) {
   return(mccResult)
 }
 
+# ************************************************
+# determineTheChurnRecords() :
+#
+# determine the people who will churn from the testing data
+# 
+#
+# INPUT:   dataset - testingData - dataset of the customers 
+#          model - model - model used to make predictions
+#          threshold - bestthreshold - threshold used to determine if a customer churns
+#
+# OUTPUT : the valuable customers from the dataset
+# ************************************************
 determineTheChurnRecords <- function(model,testingData,bestThreshold){
+  
   set.seed(100)
   #probability of the records churning
   pred <- predict(model, type = "prob", newdata = testingData)
@@ -137,22 +150,34 @@ determineTheChurnRecords <- function(model,testingData,bestThreshold){
   return(whichRecordsChurn)
 }
 
+# ************************************************
+# determineValuableCustomers() :
+#
+# determines low quality customers firstly by seeing which fall below average tenure
+# then of those customers seeing which fall below average monthly charge then of
+# of those customers which are on a month to month contract, then of those customers see 
+# which fall below the average monthly charge again.
+# 
+# those low quality customers are removed and the rest are deemed as valuable 
+#
+# INPUT:   dataset - churnCustomers - dataset of the customers who churn
+# 
+#
+# OUTPUT : the valuable customers from the dataset
+# ************************************************
 determineValuableCustomers <- function(churnCustomers){
   
-  #tenure 
-  #contract month to month
-  #monthly charges
-  #if they are less than average tenure and have less than average monthly charge 
-  #and on contract month to month let them go 
-  
+  #tenure
   averageTenure <- mean(churnCustomers$tenure)
   customersLessThanAverageTenure <- churnCustomers[which(churnCustomers$tenure <= averageTenure),]
   
+  #monthly charge
   averageMonthlyCharge <- mean(customersLessThanAverageTenure$MonthlyCharges)
   customersLessThanMonthlyCharge <- customersLessThanAverageTenure[which(customersLessThanAverageTenure$MonthlyCharges <= averageMonthlyCharge),]
     
   lowQualityCustomers <- customersLessThanMonthlyCharge[which(customersLessThanMonthlyCharge$ContractMonth.to.month == 1),]
   
+  #monthly charge of low quality customers
   meanlowQualityCustomersMonthlyCharge <- mean(lowQualityCustomers$MonthlyCharges)
   finalCustomersThatWillBeLetGo <- lowQualityCustomers[which(lowQualityCustomers$MonthlyCharges <= meanlowQualityCustomersMonthlyCharge),]
   
@@ -164,6 +189,16 @@ determineValuableCustomers <- function(churnCustomers){
   return(valuableCustomers) 
 }
 
+# ************************************************
+# discount() :
+#
+# applys a 5% discount
+#
+#
+# INPUT:   number - x - number to discount 
+#
+# OUTPUT : how much discount should be applied
+# ************************************************
 discount <- function(x) {
   return (x * 0.05)
 }
@@ -243,6 +278,7 @@ buildRandomForest <- function(){
   
   sink(file = NULL)
   
+  #Finding which customers are valuable and worth keeping
   churnRecords <- determineTheChurnRecords(model,testingData,bestThreshold)
   valuableChurn <- determineValuableCustomers(churnRecords)
   

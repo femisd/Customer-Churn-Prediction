@@ -15,7 +15,7 @@ rm(list=ls())
 # * ***********************************************
 # Global Environment Variables (available to all functions)
 
-DATASET <- "newTelcoTest.csv"  # Name of the input dataset csv file
+DATASET <- "PreprocessedTelco.csv"  # Name of the input dataset csv file
 PREDICTOR <- "ChurnYes"  # Field name of the output class to predict
 
 # Define and then load the libraries used in this project
@@ -132,7 +132,7 @@ dtEvaluation<-function(cDT, testing_data) {
   # Calculating Matthews Correlation Coefficient (MCC)
   mcc <- ModelMetrics::mcc(predicted = predictUnseenProb[,2], actual = testing_data[,PREDICTOR], cutoff = bestThreshold)
   # Calculating area underneath curve (AUC) 
-  auc<-auc(roc)
+  auc<-auc(testing_data[,PREDICTOR],predictUnseenProb[,2])
   
   # Creates a matrix and stores above values
   performance <- t(as.matrix(c(accuracy,sensitivity,specificity,mcc,auc)))

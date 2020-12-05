@@ -29,10 +29,10 @@ MYLIBRARIES<-c(
 
 
 main <- function(){
-  #source("LogisticRegression.R")
+  source("LogisticRegression.R")
   source("DT.R")
-  #source("RandomForest.R")
-  #source("nueralNet.R")
+  source("RandomForest.R")
+  source("nueralNet.R")
 }
 
 

@@ -1,0 +1,64 @@
+Decision Tree
+
+-------Confusion Matrix-------
+Confusion Matrix and Statistics
+
+          Reference
+Prediction   No  Yes
+       No  1119  110
+       Yes  430  450
+                                          
+               Accuracy : 0.744           
+                 95% CI : (0.7248, 0.7625)
+    No Information Rate : 0.7345          
+    P-Value [Acc > NIR] : 0.1682          
+                                          
+                  Kappa : 0.4448          
+                                          
+ Mcnemar's Test P-Value : <2e-16          
+                                          
+            Sensitivity : 0.8036          
+            Specificity : 0.7224          
+         Pos Pred Value : 0.5114          
+         Neg Pred Value : 0.9105          
+             Prevalence : 0.2655          
+         Detection Rate : 0.2134          
+   Detection Prevalence : 0.4173          
+      Balanced Accuracy : 0.7630          
+                                          
+       'Positive' Class : Yes             
+                                          
+-------Evaluation-------
+
+Threshold: 0.5244
+
+AUC: 0.7896131
+
+MCC Result: 0.4710488
+
+-----Variable Importance------
+                                          Overall
+ContractMonth.to.month                 314.354780
+ContractTwo.year                       204.007299
+InternetServiceDSL                      14.824965
+InternetServiceFiber.optic             186.248574
+InternetServiceNo                       29.125956
+MonthlyCharges                          59.756388
+OnlineBackupYes                          1.219872
+PaperlessBillingYes                     21.141451
+PaymentMethodElectronic.check          179.930262
+SeniorCitizen                            2.688889
+StreamingTVYes                           1.435822
+tenure                                 197.650471
+TotalCharges                            23.744297
+PartnerYes                               0.000000
+DependentsYes                            0.000000
+OnlineSecurityNo                         0.000000
+OnlineSecurityYes                        0.000000
+DeviceProtectionYes                      0.000000
+TechSupportYes                           0.000000
+StreamingMoviesYes                       0.000000
+ContractOne.year                         0.000000
+PaymentMethodBank.transfer..automatic.   0.000000
+PaymentMethodCredit.card..automatic.     0.000000
+PaymentMethodMailed.check                0.000000
