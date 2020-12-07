@@ -71,7 +71,7 @@ getCorrelation <- function(telco) {
 
 
 # Reading Telco
-telco<-read.csv("TelcoCustomerChurn.csv")
+telco<-read.csv("Telco.csv")
 
 # Getting rid of customerID
 #telco<-telco[c(2:21)]
@@ -185,3 +185,5 @@ telco<-merge(telco, new)
 
 # Exporting the data frame
 write.csv(telco, "TelcoNormal.csv")
+end()
+
