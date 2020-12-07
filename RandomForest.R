@@ -179,9 +179,18 @@ determineValuableCustomers <- function(churnCustomers){
   
   #monthly charge of low quality customers
   meanlowQualityCustomersMonthlyCharge <- mean(lowQualityCustomers$MonthlyCharges)
-  finalCustomersThatWillBeLetGo <- lowQualityCustomers[which(lowQualityCustomers$MonthlyCharges <= meanlowQualityCustomersMonthlyCharge),]
   
+  finalCustomersThatWillBeLetGo <- lowQualityCustomers[which(lowQualityCustomers$MonthlyCharges <= meanlowQualityCustomersMonthlyCharge),]
   valuableCustomers <- churnCustomers[-which(lowQualityCustomers$MonthlyCharges <= meanlowQualityCustomersMonthlyCharge),]
+
+  customerDecision <- c("kept","let Go")
+  amount <- c(nrow(valuableCustomers),nrow(finalCustomersThatWillBeLetGo))
+  customerDf <- data.frame(customerDecision, amount)
+  valueNonValue <- ggplot(customerDf,aes(x=customerDecision)) + 
+    geom_bar(aes(y=amount),stat="identity",position="dodge",col="blue") +
+    geom_text(data=customerDf,aes(x=customerDecision,y=amount,label=amount),vjust=0)
+  
+  grid.arrange(valueNonValue,nrow=1,top="Churn customers")
   
   print(paste("customers being let go",nrow(finalCustomersThatWillBeLetGo)))
   print(paste("customers being kept",nrow(valuableCustomers)))
