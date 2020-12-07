@@ -57,7 +57,7 @@ getCorrelation <- function(telco) {
           if(i != 39){
             correlation <- cor.test(telco[,i], telco[,x], method = "pearson")
             
-            if((correlation$estimate[[1]]) >= 0.7){
+            if((correlation$estimate[[1]]) >= 0.5){
               print(paste(names(telco)[i],"-----",names(telco)[x]))
             }}}}}}}
 # ********************************************************************************
@@ -113,21 +113,21 @@ dmy <- dummyVars(" ~ .", data = telco)
 telco <- data.frame(predict(dmy, newdata = telco))
 
 #Removing unecessary columns
-# telco<-subset(telco, select=-c(genderFemale))
-# telco<-subset(telco, select=-c(PartnerNo))
-# telco<-subset(telco, select=-c(DependentsNo))
-# telco<-subset(telco, select=-c(PhoneServiceNo)) ##delete?
-# telco<-subset(telco, select=-c(PhoneServiceYes))
-# telco<-subset(telco, select=-c(MultipleLinesNo))
-# telco<-subset(telco, select=-c(OnlineBackupNo))
-# telco<-subset(telco, select=-c(DeviceProtectionNo))
-# telco<-subset(telco, select=-c(TechSupportNo))
-# telco<-subset(telco, select=-c(StreamingTVNo))
-# telco<-subset(telco, select=-c(StreamingMoviesNo))
-# telco<-subset(telco, select=-c(PaperlessBillingNo))
-# telco<-subset(telco, select=-c(ChurnNo))
-# telco<-subset(telco, select=-c(genderMale))
-# telco<-subset(telco, select=-c(MultipleLinesYes))
+telco<-subset(telco, select=-c(genderFemale))#no impact on churn rates
+telco<-subset(telco, select=-c(PartnerNo))
+telco<-subset(telco, select=-c(DependentsNo))
+telco<-subset(telco, select=-c(PhoneServiceNo)) 
+telco<-subset(telco, select=-c(PhoneServiceYes))
+telco<-subset(telco, select=-c(MultipleLinesNo))
+telco<-subset(telco, select=-c(OnlineBackupNo))
+telco<-subset(telco, select=-c(DeviceProtectionNo))
+telco<-subset(telco, select=-c(TechSupportNo))
+telco<-subset(telco, select=-c(StreamingTVNo))
+telco<-subset(telco, select=-c(StreamingMoviesNo))
+telco<-subset(telco, select=-c(PaperlessBillingNo))
+telco<-subset(telco, select=-c(ChurnNo))
+telco<-subset(telco, select=-c(genderMale))#no impact on churn rates
+telco<-subset(telco, select=-c(MultipleLinesYes))
 # ##############################################################################
 # 
 # telco<-subset(telco, select=-c(PartnerYes))

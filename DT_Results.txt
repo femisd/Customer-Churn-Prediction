@@ -5,6 +5,85 @@ Confusion Matrix and Statistics
 
           Reference
 Prediction   No  Yes
+       No  1549    0
+       Yes    0  560
+                                     
+               Accuracy : 1          
+                 95% CI : (0.9983, 1)
+    No Information Rate : 0.7345     
+    P-Value [Acc > NIR] : < 2.2e-16  
+                                     
+                  Kappa : 1          
+                                     
+ Mcnemar's Test P-Value : NA         
+                                     
+            Sensitivity : 1.0000     
+            Specificity : 1.0000     
+         Pos Pred Value : 1.0000     
+         Neg Pred Value : 1.0000     
+             Prevalence : 0.2655     
+         Detection Rate : 0.2655     
+   Detection Prevalence : 0.2655     
+      Balanced Accuracy : 1.0000     
+                                     
+       'Positive' Class : Yes        
+                                     
+-------Evaluation-------
+
+Threshold: 0.5
+
+AUC: 1
+
+MCC Result: 1
+
+-----Variable Importance------
+                                         Overall
+ChurnNo                                1309.0000
+ContractMonth.to.month                  314.3548
+ContractTwo.year                        204.0073
+InternetServiceFiber.optic              142.7386
+tenure                                  169.9260
+genderFemale                              0.0000
+genderMale                                0.0000
+SeniorCitizen                             0.0000
+PartnerNo                                 0.0000
+PartnerYes                                0.0000
+DependentsNo                              0.0000
+DependentsYes                             0.0000
+PhoneServiceNo                            0.0000
+PhoneServiceYes                           0.0000
+MultipleLinesNo                           0.0000
+MultipleLinesYes                          0.0000
+InternetServiceDSL                        0.0000
+InternetServiceNo                         0.0000
+OnlineSecurityNo                          0.0000
+OnlineSecurityYes                         0.0000
+OnlineBackupNo                            0.0000
+OnlineBackupYes                           0.0000
+DeviceProtectionNo                        0.0000
+DeviceProtectionYes                       0.0000
+TechSupportNo                             0.0000
+TechSupportYes                            0.0000
+StreamingTVNo                             0.0000
+StreamingTVYes                            0.0000
+StreamingMoviesNo                         0.0000
+StreamingMoviesYes                        0.0000
+ContractOne.year                          0.0000
+PaperlessBillingNo                        0.0000
+PaperlessBillingYes                       0.0000
+PaymentMethodBank.transfer..automatic.    0.0000
+PaymentMethodCredit.card..automatic.      0.0000
+PaymentMethodElectronic.check             0.0000
+PaymentMethodMailed.check                 0.0000
+MonthlyCharges                            0.0000
+TotalCharges                              0.0000
+Decision Tree
+
+-------Confusion Matrix-------
+Confusion Matrix and Statistics
+
+          Reference
+Prediction   No  Yes
        No  1119  110
        Yes  430  450
                                           
