@@ -1,4 +1,4 @@
-myLibraries<-c("mltools", "data.table", "caret", "dplyr", "corrplot", "memisc", "caret", "plyr", "DMwR")
+myLibraries<-c("mltools", "data.table", "caret", "dplyr", "corrplot", "memisc", "caret", "plyr")
 library(pacman)
 pacman::p_load(char=myLibraries,install=TRUE,character.only=TRUE)
 
@@ -39,13 +39,6 @@ normalise<-function(x){
   x<-(x-min(x))/(max(x)-min(x))
   return(x)
 }
-
-# Un-normalise the data
-
-unNormalise<-function(x){
-  x<- (x)(max(x)-min(x)) + min(x)
-}
-
 # ********************************************************************************
 # Normalising all the data (not being used atm)
 # normaliseEverything<-function(data) {
@@ -71,12 +64,10 @@ getCorrelation <- function(telco) {
 
 
 # Reading Telco
-telco<-read.csv("Telco.csv")
+telco<-read.csv("TelcoCustomerChurn.csv")
 
 # Getting rid of customerID
-#telco<-telco[c(2:21)]
-
-print(class(telco$SeniorCitizen))
+telco<-telco[c(2:21)]
 
 # Can use this code to get rid of NA values as opposed to the code below..
 # telco<-telco[complete.cases(telco),]
@@ -97,7 +88,7 @@ print(paste("% of data which is na's",(nrow(telcoNAs)/nrow(telco))*100,"%"))
 
 #remove the rows as such a small percentage
 telco <- na.omit(telco)
-# 
+
 # Standardisation (z-score normalisation)
 # z-scale
 telco$MonthlyCharges<-as.data.frame(scale(telco$MonthlyCharges,center=TRUE, scale=TRUE))
@@ -106,12 +97,6 @@ telco$TotalCharges<-as.data.frame(scale(telco$TotalCharges,center=TRUE, scale=TR
 # # Normalising continuous ordinals
 # telco$MonthlyCharges<-normaliseEverything(telco$MonthlyCharges)
 # telco$TotalCharges<-normaliseEverything(telco$TotalCharges)
-
-max<-max(telco["MonthlyCharges"])
-print(max)
-
-min<-min(telco["MonthlyCharges"])
-print(min)
 
 # Same as above (although when using this you don't need normaliseEverything Function) Which one to use???
 telco$MonthlyCharges<-sapply(telco$MonthlyCharges, normalise)
@@ -123,18 +108,11 @@ telco[telcoNoInternet,c(9,10,11,12,13,14)]<-"No"
 telcoNoInternet <- which(telco$PhoneService == "No")
 telco[telcoNoInternet,7]<-"No"
 
-# One hot encoding
-dmy <- dummyVars("~ Churn", data = telco)
-new <- data.frame(predict(dmy, newdata = telco))
-new<- subset(new, select=-c(ChurnNo))
+# # One hot encoding
+dmy <- dummyVars(" ~ .", data = telco)
+telco <- data.frame(predict(dmy, newdata = telco))
 
-telco<-subset(telco, select=-c(Churn))
-
-
-telco<-merge(telco, new)
-
-#
-# #Removing unecessary columns
+#Removing unecessary columns
 # telco<-subset(telco, select=-c(genderFemale))
 # telco<-subset(telco, select=-c(PartnerNo))
 # telco<-subset(telco, select=-c(DependentsNo))
@@ -151,7 +129,7 @@ telco<-merge(telco, new)
 # telco<-subset(telco, select=-c(genderMale))
 # telco<-subset(telco, select=-c(MultipleLinesYes))
 # ##############################################################################
-#
+# 
 # telco<-subset(telco, select=-c(PartnerYes))
 # telco<-subset(telco, select=-c(DependentsYes))
 # telco<-subset(telco, select=-c(DeviceProtectionYes))
@@ -164,26 +142,12 @@ telco<-merge(telco, new)
 # telco<-subset(telco, select=-c(ContractTwo.year))
 # telco<-subset(telco, select=-c(PaymentMethodCredit.card..automatic.))
 # telco<-subset(telco, select=-c(PaymentMethodMailed.check))
-# telco<-subset(telco, select=-c(ContractOne.year))
-#
-# getCorrelation(telco)
+
+getCorrelation(telco)
 
 # random <- cor.test(telco$tenure, telco$tenure, method = "pearson")
 # print(random$estimate)
 
-# # Creating bins for tenure
-# telco <- mutate(telco, tenure_bin = tenure)
-# #
-# telco$tenure_bin[telco$tenure_bin >=0 & telco$tenure_bin <= 12] <- '0-1 year'
-# telco$tenure_bin[telco$tenure_bin > 12 & telco$tenure_bin <= 24] <- '1-2 years'
-# telco$tenure_bin[telco$tenure_bin > 24 & telco$tenure_bin <= 36] <- '2-3 years'
-# telco$tenure_bin[telco$tenure_bin > 36 & telco$tenure_bin <= 48] <- '3-4 years'
-# telco$tenure_bin[telco$tenure_bin > 48 & telco$tenure_bin <= 60] <- '4-5 years'
-# telco$tenure_bin[telco$tenure_bin > 60 & telco$tenure_bin <= 72] <- '5-6 years'
-#
-# telco$tenure_bin <- as.factor(telco$tenure_bin)
 
 # Exporting the data frame
-write.csv(telco, "TelcoNormal.csv")
-end()
-
+write.csv(telco, "PreprocessedTelco.csv")
