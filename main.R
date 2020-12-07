@@ -29,6 +29,7 @@ MYLIBRARIES<-c(
 
 
 main <- function(){
+  source("dataUnderstanding.R")
   source("LogisticRegression.R")
   source("DT.R")
   source("RandomForest.R")
