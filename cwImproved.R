@@ -69,6 +69,8 @@ telco<-read.csv("TelcoCustomerChurn.csv")
 # Getting rid of customerID
 telco<-telco[c(2:21)]
 
+numericOrSymbolic <- as.data.frame(sapply(telco, typeof))
+
 # Can use this code to get rid of NA values as opposed to the code below..
 # telco<-telco[complete.cases(telco),]
 
