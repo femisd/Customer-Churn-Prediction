@@ -57,7 +57,7 @@ getCorrelation <- function(telco) {
           if(i != 39){
             correlation <- cor.test(telco[,i], telco[,x], method = "pearson")
             
-            if((correlation$estimate[[1]]) >= 0.5){
+            if((correlation$estimate[[1]]) >= 0.4){
               print(paste(names(telco)[i],"-----",names(telco)[x]))
             }}}}}}}
 # ********************************************************************************
@@ -116,8 +116,8 @@ telco <- data.frame(predict(dmy, newdata = telco))
 telco<-subset(telco, select=-c(genderFemale))#no impact on churn rates
 telco<-subset(telco, select=-c(PartnerNo))
 telco<-subset(telco, select=-c(DependentsNo))
-telco<-subset(telco, select=-c(PhoneServiceNo)) 
-telco<-subset(telco, select=-c(PhoneServiceYes))
+telco<-subset(telco, select=-c(PhoneServiceNo))#no impact on churn rates 
+telco<-subset(telco, select=-c(PhoneServiceYes))#no impact on churn rates
 telco<-subset(telco, select=-c(MultipleLinesNo))
 telco<-subset(telco, select=-c(OnlineBackupNo))
 telco<-subset(telco, select=-c(DeviceProtectionNo))

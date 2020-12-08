@@ -24,17 +24,20 @@ MYLIBRARIES<-c(
   "rpart", 
   "rpart.plot", 
   "rattle", 
-  "assertr"
+  "assertr",
+  "plotly",
+  "ggplot2",
+  "gridExtra"
 )
 
 
 main <- function(){
-  source("dataUnderstanding.R")
-  source("cwImproved.R")
-  source("LogisticRegression.R")
-  source("DT.R")
+  #source("dataUnderstanding.R")
+  #source("cwImproved.R")
+  # source("LogisticRegression.R")
+  # source("DT.R")
   source("RandomForest.R")
-  source("nueralNet.R")
+  # source("nueralNet.R")
 }
 
 
