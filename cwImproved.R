@@ -181,7 +181,8 @@ print(paste("% of data which is na's",(nrow(telcoNAs)/nrow(telco))*100,"%"))
 telco <- na.omit(telco)
   
 # Removing any outliers
-telco<-removeOutliers(telco, cols = names(telco))  
+removeOutliers(telco, cols = names(telco$MonthyCharges))
+removeOutliers(telco, cols = names(telco$TotalCharges))
 
 # Standardisation (z-score normalisation)
 # z-scale applying to MonthlyCharges and TotalCharges

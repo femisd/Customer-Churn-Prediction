@@ -314,3 +314,82 @@ StreamingMoviesYes                     5.802
 PartnerYes                             5.755
 DependentsYes                          4.059
 SeniorCitizen                          3.440
+Random Forest
+
+
+-------Model Result-------
+  mtry  Accuracy     Kappa  AccuracySD    KappaSD
+1    2 0.7599857 0.5199715 0.006556625 0.01311325
+2    7 0.7546362 0.5092725 0.012104538 0.02420908
+3   13 0.7478602 0.4957204 0.007565336 0.01513067
+4   18 0.7457204 0.4914408 0.016643740 0.03328748
+5   24 0.7475036 0.4950071 0.010087115 0.02017423
+
+
+----Class Probability Results----
+[1] 0.764 0.026 0.570 0.048 0.992 0.994
+
+
+-------Confusion Matrix-------
+Confusion Matrix and Statistics
+
+          Reference
+Prediction   0   1
+         0 901  85
+         1 389 382
+                                          
+               Accuracy : 0.7502          
+                 95% CI : (0.7088, 0.7509)
+    No Information Rate : 0.7342          
+    P-Value [Acc > NIR] : 0.6586          
+                                          
+                  Kappa : 0.4276          
+                                          
+ Mcnemar's Test P-Value : <2e-16          
+                                          
+            Sensitivity : 0.8180          
+            Specificity : 0.6984          
+         Pos Pred Value : 0.4955          
+         Neg Pred Value : 0.9138          
+             Prevalence : 0.2658          
+         Detection Rate : 0.2174          
+   Detection Prevalence : 0.4388          
+      Balanced Accuracy : 0.7582          
+                                          
+       'Positive' Class : 1               
+                                          
+
+
+-------Evaluation-------
+Threshold: 0.551
+
+AUC: 0.8340123
+
+MCC Result: 0.4597321
+
+-----Variable Importance------
+rf variable importance
+
+  only 20 most important variables shown (out of 24)
+
+                                     Overall
+tenure                               100.000
+ContractMonth.to.month                90.445
+TotalCharges                          80.809
+MonthlyCharges                        79.273
+InternetServiceFiber.optic            46.227
+ContractTwo.year                      44.668
+PaymentMethodElectronic.check         31.155
+InternetServiceNo                     20.396
+TechSupportYes                        15.587
+PaperlessBillingYes                   13.692
+ContractOne.year                      12.926
+DependentsYes                         10.373
+InternetServiceDSL                     9.202
+OnlineSecurityYes                      8.683
+OnlineSecurityNo                       7.482
+StreamingMoviesYes                     6.068
+OnlineBackupYes                        5.548
+PartnerYes                             5.055
+PaymentMethodCredit.card..automatic.   4.370
+SeniorCitizen                          3.806
