@@ -5,7 +5,9 @@ KEY_COLUMN <- "ChurnYes"
 # Learning model variables
 MODEL_METHOD <- "rf"
 TRAINING_PARAM <- Class ~.
-TUNEL_LENGTH <- 5
+TUNE_LENGTH <- 5
+NTREES <- 200
+
 
 # Cross validation variables
 FOLD_NUMBER <- 2
@@ -21,19 +23,50 @@ MEAN <- 64.79821
 SD <- 30.08597
 
 #Read dataset
+# ************************************************
+# readDataset() :
+#
+# Read the dataset form the csv file and down sample 
+#
+# INPUT:   datafile - the csv file
+#          keyColumn - The column used as the predictor
+#
+# OUTPUT : dataframe of the dataset
+# ************************************************
 readDataset <- function(datafile, keyColumn){
   dataset<-read.csv(datafile, encoding="UTF-8", stringsAsFactors = FALSE)
   dataset[,keyColumn] = as.factor(dataset[,keyColumn])
   return( dataset<-subset(dataset, select=-c(X)))
 }
 #un-normalise
+# ************************************************
+# unNormalise() :
+#
+# Un-normalise the dataset to return the original values
+#
+# INPUT:   MAX - maximum parameter
+#          MIN - minimum parameter
+#
+# OUTPUT : un-normalized dataframe
+# ************************************************
 unNormalise<-function(MAX, MIN, x){
    x<- (x)*(MAX-MIN) + MIN
 
   return (x)
 }
-# ********************************************************************************
-#unS
+
+
+#un-standardise
+# ************************************************
+# unStandardise() :
+#
+# Un-standardise the dataset to return the original values
+#
+# INPUT:   SD - standard deviation parameter
+#          MEAN - mean parameter
+#
+# OUTPUT : un-standardise dataframe
+# ************************************************
 unStandardise<-function(SD,MEAN,x){
   x<- ((x)*SD)+MEAN
   
@@ -41,12 +74,38 @@ unStandardise<-function(SD,MEAN,x){
 }
 
 # Prepare training data
+
+
+#Separateing TrainingSet
+# ************************************************
+# separateTrainingSet() :
+#
+# Separate Training Set
+#
+# INPUT:   dataset - dataset
+#          pValue - p value
+#          keyColumn - predictor column
+#
+# OUTPUT : return training set
+# ***********************************************
 separateTrainingSet <- function(dataset, pValue, keyColumn){
   trainingSet <- createDataPartition(dataset[,keyColumn],p= pValue, list = FALSE)
   return(trainingSet)
 }
 
-# Return training data
+
+#Extract Training Data
+# ************************************************
+# getTrainingData() :
+#
+# Extract Training Data
+#
+# INPUT:   dataset - dataset
+#          trainSet - training set generated above
+# 
+#
+# OUTPUT : return training data as a dataframe
+# ***********************************************
 getTrainingData <- function(dataset, trainSet){
   trainSet <- dataset[trainSet,]
   set.seed(100)
@@ -56,37 +115,116 @@ getTrainingData <- function(dataset, trainSet){
 }
 
 # Return testing data
+#Generate Testing Data
+# ************************************************
+# getTestingData() :
+#
+# Extract testing Data
+#
+# INPUT:   dataset - dataset
+#          trainSet - training set generated above
+# 
+#
+# OUTPUT : return testing data as a dataframe
+# ***********************************************
 getTestingData <- function(dataset, trainSet){
   return (dataset[-trainSet,])
 }
 
+
 #10 fold cross validation
+#Generate createCross Validation
+# ************************************************
+# createCrossValidation() :
+#
+#
+# INPUT:   validationMethod - cross validation method
+#          numbers - k fold number
+#          repeats - number of repeats
+# 
+#
+# OUTPUT : return cross validation
+# ***********************************************
 createCrossValidation <- function(validationMethod, numbers, repeats){
   return (trainControl(method = validationMethod ,number = numbers, repeats = repeats))
 }
 
-generateRandomForestModel <- function(trainingParam, data, modelMethod, tunelLength, kControl){
-  return(train(trainingParam, data=data, method=modelMethod, tuneLength=tunelLength, trControl=kControl))
+#Generate generate Random Forest Model
+# ************************************************
+# generateRandomForestModel() :
+#
+# Train Random Forest Model
+#
+# INPUT:   trainingParam - training formula
+#          data - training data
+#          modelMethod - Model Method
+#          tuneLength - tune length of mtrys
+#          kControl - kControl parameter from the cross validation
+#          nTrees - number of trees in the forest
+# 
+#
+# OUTPUT : return trauned model
+# ***********************************************
+generateRandomForestModel <- function(trainingParam, data, modelMethod, tuneLength, kControl, nTrees){
+  return(train(trainingParam, data=data, method=modelMethod, tuneLength=tuneLength, trControl=kControl, nTrees = nTrees))
 }
 
 
+#Generate Class Probability Prediction
+# ************************************************
+# createClassProbabilityPrediction() :
+#
+# Generate Class Probability Prediction
+#
+# INPUT:   model - Random Forest model
+#          dataset - original dataset
+# 
+#
+# OUTPUT : return class probability
+# ***********************************************
 createClassProbabilityPrediction <- function(model, dataset){
   #Predict class probabilities against the original dataset
   prediction <- predict(model, dataset, "prob")
   return(prediction[,2])
 }
 
-# generate confusion matrix
+# Generate confusion matrix
+# ************************************************
+# creatConfusionMatrix() :
+#
+# Generate confusion matrix
+#
+# INPUT:   model - Random Forest model
+#          testingData - testing dataset
+#          keyColumn - the predictor
+#          positive class - 0 or 1 in terms of Yes and No as the positive class
+# 
+#
+# OUTPUT : return confusion matrix
+# ***********************************************
 creatConfusionMatrix <- function(model, testingData, keyColumn, positiveCLass){
   prediction<- predict(model,newdata=testingData)
   confusionMatrix<- caret::confusionMatrix(data=prediction, reference = testingData[,keyColumn], positive = positiveCLass)
   return(confusionMatrix)
 }
 
+################
 # Evaluate model
+###############
 
-# ROC
-
+# Generate ROC
+# ************************************************
+# createRoc() :
+#
+# Generate ROC
+#
+# INPUT:   model - Random Forest model
+#          testingData - testing dataset
+#          predictor - the predictor
+# 
+#
+# OUTPUT : return the best threshold and calculate ROC
+# ***********************************************
 createRoc <- function(model, testingData, predictor){
   
   pred <- predict(model, type = "prob", newdata = testingData)
@@ -96,15 +234,38 @@ createRoc <- function(model, testingData, predictor){
   return(bestThreshold)
 }
 
-# AUC
 
+# Generate AUC
+# ************************************************
+# generateAuc() :
+#
+# Generate AUC
+#
+# INPUT:   model - Random Forest model
+#          testingData - testing dataset
+#          predictor - the predictor
+# 
+#
+# OUTPUT : return the AUC
+# ***********************************************
 generateAuc <- function (model, testingData, predictor){
   pred <- predict(model, type = "prob", newdata = testingData)
   auc<-auc(testingData[, predictor],pred[,2])
 }
 
-# MCC
-
+# Generate MCC
+# ************************************************
+# createMcc() :
+#
+# Generate MCC
+#
+# INPUT:   model - Random Forest model
+#          testingData - testing dataset
+#          confusionMat - the confusion matrix
+# 
+#
+# OUTPUT : return the MCC
+# ***********************************************
 createMcc <- function(model, testingData, confusionMat) {
   
   pred <- predict(model, newdata = testingData)
@@ -212,6 +373,10 @@ discount <- function(x) {
   return (x * 0.05)
 }
 
+#####################################################
+# Builds the Random Forest Model and Runs evaluation
+#####################################################
+
 buildRandomForest <- function(){
   
   dataset <- readDataset(DATA_FILE, KEY_COLUMN)
@@ -220,7 +385,7 @@ buildRandomForest <- function(){
   testingData <- getTestingData(dataset, trainSet)
   kControl <- createCrossValidation(VALIDATION_METHOD, FOLD_NUMBER, REPEATS)
   
-  model <- generateRandomForestModel(TRAINING_PARAM, trainingData, MODEL_METHOD, TUNEL_LENGTH, kControl)
+  model <- generateRandomForestModel(TRAINING_PARAM, trainingData, MODEL_METHOD, TUNE_LENGTH, kControl, NTREES)
   classProbabilityResult <- createClassProbabilityPrediction(model, dataset)
   confusionMatrix <- creatConfusionMatrix(model, testingData, KEY_COLUMN, CONFUSION_MATRIX_POSITIVE_CLASS)
 
