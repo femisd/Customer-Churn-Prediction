@@ -33,11 +33,11 @@ MYLIBRARIES<-c(
 
 main <- function(){
   source("dataUnderstanding.R")
-  source("cwImproved.R")
+  source("DatasetPreProcessing.R")
   source("LogisticRegression.R")
   source("DT.R")
-  source("RandomForest.R")
   source("nueralNet.R")
+  source("RandomForest.R")
 }
 
 
