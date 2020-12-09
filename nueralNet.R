@@ -22,12 +22,25 @@ rm(list=ls())
 #                "assertr")
 
 INPUT_FILE="PreprocessedTelco.csv";
-MAX_ITER=250;
+MAX_ITER=150
 DEPENDEDNT_VARIABLE='ChurnYes';
-NUM_FOLDS=10;
-NUM_REPEATS=3;
 
 
+# Cross validation variables
+FOLD_NUMBER <- 10
+REPEATS <- 3
+P_VALUE <- .75
+VALIDATION_METHOD <- "repeatedcv"
+
+# ************************************************
+# readFileDataFrame() :
+#
+#reads in a csv file and converts it into a dataframe
+#
+# INPUT: Name of the input file   
+#
+# OUTPUT : dataframe  
+# ************************************************
 readFileDataFrame<-function(dataset){
    
    telcoDataset<-read.csv(dataset,encoding="UTF-8",stringsAsFactors = FALSE);
@@ -35,13 +48,20 @@ readFileDataFrame<-function(dataset){
    return(telcoDataset)
 }
 
-normalizedData<-function(x){
-   return((x-min(x)) / (max(x)-min(x)))
-}
-
-normaliseDataSet<- function(telcoDataset,DEPENDEDNT_VARIABLE){
+# ************************************************
+# factorDependentVariable() :
+#
+# factor the churnYes Column  
+#
+# INPUT:  telcoDataset - original dataframe
+#         DEPENDEDNT_VARIABLE-churnYes
+#
+#
+# OUTPUT : factored ChurnYes
+# ************************************************
+factorDependentVariable<- function(telcoDataset,DEPENDEDNT_VARIABLE){
    
-   maxmindf<- as.data.frame(lapply(telcoDataset, normalizedData));
+   maxmindf<- as.data.frame(telcoDataset);
    
    maxmindf[, DEPENDEDNT_VARIABLE] = as.factor(maxmindf[, DEPENDEDNT_VARIABLE])
    
@@ -49,7 +69,24 @@ normaliseDataSet<- function(telcoDataset,DEPENDEDNT_VARIABLE){
 }
 
 # ************************************************
+# createCrossValidation() :
+#
+# caret model control
+#
+# INPUT:  validationMethod - validation method used
+#         numbers-fold number
+#         repeats- number of repeats
+# OUTPUT : stratified random split of the data  
+# ************************************************
+createCrossValidation <- function(validationMethod, numbers, repeats){
+   return (trainControl(method = validationMethod ,number = numbers, repeats = repeats))
+}
+
+
+# ************************************************
 # partitionDataSet() :
+#
+#createDataPartition does a stratified random split of the data.
 #
 # INPUT:  dataframe  
 #
@@ -63,11 +100,12 @@ partitionDataSet<-function(maxmindf){
 }
 
 # ************************************************
-# partitionDataSet() :
+# createTrainData() :
 #
-# INPUT:  dataframe  
+# INPUT:  maxmindf - original dataframe
+#         totTrain - partitioned dataframe 
 #
-# OUTPUT : stratified random split of the data  
+# OUTPUT : training data dataframe  
 # ************************************************
 createTrainData<-function(maxmindf,totTrain){
    
@@ -76,6 +114,14 @@ createTrainData<-function(maxmindf,totTrain){
    return(trainingData)
 }
 
+# ************************************************
+# createTestingData() :
+#
+# INPUT:  maxmindf - original dataframe
+#         totTrain - partitioned dataframe 
+#
+# OUTPUT : testing data dataframe  
+# ************************************************
 createTestingData<-function(maxmindf,totTrain){
    
    testing <-maxmindf[-totTrain,]
@@ -113,12 +159,42 @@ trainModel<-function(dependentVar,data,algo,maxiter,tuneGrid,control){
    return(telcoTrain)
 }
 
+# ************************************************
+# createPrediciton() :
+#
+# INPUT:  trainedModel - trained Model
+#         testingData - testing data datagrame 
+#
+# OUTPUT : a vector of predictions
+# ************************************************
 createPrediciton<-function(trainedModel,testingData){
    predictTelco<- predict(trainedModel,newdata=testingData)
    
    return(predictTelco)
 }
 
+# ************************************************
+# createPredicitonProb() :
+#
+# INPUT:  trainedModel - trained Model
+#         testingData - testing data datagrame 
+#
+# OUTPUT : a vector of predictions
+# ************************************************
+createPredicitonProb<-function(trainedModel,testingData){
+   predictTelco<-predict(trainedModel,type="prob",newdata=testingData)   
+   return(predictTelco)
+}
+
+# ************************************************
+# createConfusionMatrix() :
+#
+# INPUT:  prediction - prediction variable
+#         testingData - testing data datagrame 
+#         keyColumn - dependent variable chrunYes
+#
+# OUTPUT : a confusion matrix
+# ************************************************
 createConfusionMatrix<-function(prediction,testingData,keyColumn){
    
    confusionMatrix<-caret::confusionMatrix(data=prediction,testingData[,keyColumn],positive='1')
@@ -127,6 +203,18 @@ createConfusionMatrix<-function(prediction,testingData,keyColumn){
    
 }
 
+# ************************************************
+# createRocCurve() :
+#
+#create a roc curve
+#
+# INPUT:  DEPENDEDNT_VARIABLE - churnYes
+#         testingData - testing data datagrame 
+#         prediction - prediction variable
+#         modelName - trainedModel   
+#
+# OUTPUT : a confusion matrix
+# ************************************************
 createRocCurve<-function(testingData,DEPENDEDNT_VARIABLE,prediction,modelName){
    
    rocVal<-roc(testingData[, DEPENDEDNT_VARIABLE],prediction[,2],plot=TRUE, legacy.axes=TRUE, print.auc=TRUE, main=paste(" NNET - ",modelName))
@@ -135,7 +223,15 @@ createRocCurve<-function(testingData,DEPENDEDNT_VARIABLE,prediction,modelName){
    
 }
 
-
+# ************************************************
+# getBestThreshold() :
+#
+#calculate the best threshold from the roc curve
+#
+# INPUT:  rocVal - roc curve.  
+#
+# OUTPUT : best threshold
+# ************************************************
 getBestThreshold<-function(rocVal){
    
    bestThreshold <- round(coords(rocVal, "best", "threshold",transpose = TRUE)[1],digits = 4)
@@ -144,8 +240,21 @@ getBestThreshold<-function(rocVal){
    
 }
 
-
-matthew<-function(TP,FP,TN,FN){
+# ************************************************
+# createMatthew() :
+#
+#calculate the matthew correlation coefficient 
+#
+# INPUT:  confusionMat- our confusion matrix
+#
+# OUTPUT : mcc value
+# ************************************************
+createMatthew<-function(confusionMat){
+   
+   TP<-confusionMat$table[1]
+   FN<-confusionMat$table[2]
+   FP<-confusionMat$table[3]
+   TN<-confusionMat$table[4]
    
    matthewsCorrelationCoef <- mcc(preds = NULL, actuals = NULL,TP=TP, FP=FP, TN=TN, FN=FN)
    
@@ -153,7 +262,43 @@ matthew<-function(TP,FP,TN,FN){
    
 }
 
+# ************************************************
+# createAucVal() :
+#
+#calculate the auc
+#
+# INPUT:  testingData - True positives
+#         DEPENDEDNT_VARIABLE - False positives
+#         probPredictTelco - prob variable
+#         
+# OUTPUT : auc value
+# ************************************************
+createAucVal<-function(testingData,DEPENDEDNT_VARIABLE,probPredictTelco){
+   
+   aucVal<- auc(testingData[, DEPENDEDNT_VARIABLE],probPredictTelco[,2])
+   
+   return(aucVal)
+   
+}
 
+# ************************************************
+# downSampleData() :
+#
+#downsample the data
+#
+# INPUT:  trainingData - training dataframe
+#         DEPENDEDNT_VARIABLE - chrunYes
+#  
+#         
+# OUTPUT : auc value
+# ************************************************
+downSampleData<-function(trainingData,DEPENDEDNT_VARIABLE){
+   
+   downtrainData <- downSample(x = trainingData[, -ncol(trainingData)],
+                               y = factor(trainingData[,DEPENDEDNT_VARIABLE]))
+   return(downtrainData)
+   
+}
 
 
 # ************************************************
@@ -167,51 +312,42 @@ matthew<-function(TP,FP,TN,FN){
 # ************************************************
 nueralNet<-function(){
   
+   set.seed(100)
   
-  telcoDataset<-readFileDataFrame(INPUT_FILE);
+   telcoDataset<-readFileDataFrame(INPUT_FILE);
   
-  maxmindf<- normaliseDataSet(telcoDataset,DEPENDEDNT_VARIABLE)
+   telcoDataset<-subset(telcoDataset, select=-c(X))
   
-  #numeric -> factor
+   maxmindf<- factorDependentVariable(telcoDataset,DEPENDEDNT_VARIABLE)
 
-  totTrain <- partitionDataSet(maxmindf)
+   totTrain <- partitionDataSet(maxmindf)
   
-  trainingData<-maxmindf[totTrain,]
-  testingData <-maxmindf[-totTrain,]
+   trainingData<-createTrainData(maxmindf,totTrain)
+ 
+   testingData <-createTestingData(maxmindf,totTrain)
   
-  downtrainData <- downSample(x = trainingData[, -ncol(trainingData)],
-                              y = factor(trainingData[,DEPENDEDNT_VARIABLE]))
+   downtrainData <- downSampleData(trainingData,DEPENDEDNT_VARIABLE)
   
-  trainingData <- data.frame(downtrainData)
+   trainingData <- data.frame(downtrainData)
   
-   #ten fold val
-   kControl <- trainControl(method = "repeatedcv",number =10,repeats=3)
+   kControl <- createCrossValidation(VALIDATION_METHOD, FOLD_NUMBER, REPEATS)
     
-   print(Sys.time())
-   
-   telcoTrain <- trainModel(Class~.,trainingData,"nnet",MAX_ITER,expand.grid(.size=c(1,3,5,7,10),.decay=c(0,0.001,0.1,1)), kControl)
+   telcoTrain <- trainModel(Class~.,trainingData,"nnet",MAX_ITER,expand.grid(.size=c(3,5,7,10),.decay=c(0,0.001,0.1,1)), kControl)
    
    predicitonMod<- createPrediciton(telcoTrain,testingData)
    
-   probPredictTelco<- predict(telcoTrain,type="prob",newdata=testingData)
+   probPredictTelco<- createPredicitonProb(telcoTrain,testingData)
    
    confusionMat <-createConfusionMatrix(predicitonMod,testingData,DEPENDEDNT_VARIABLE)
    
    rocVal<- createRocCurve(testingData,DEPENDEDNT_VARIABLE,probPredictTelco,telcoTrain)
    
-   auc<-auc(testingData[, DEPENDEDNT_VARIABLE],probPredictTelco[,2])
+   auc<-createAucVal(testingData,DEPENDEDNT_VARIABLE,probPredictTelco)
    
    bestThreshold <- getBestThreshold(rocVal)
-
    
-   TP<-confusionMat$table[1]
-   FN<-confusionMat$table[2]
-   FP<-confusionMat$table[3]
-   TN<-confusionMat$table[4]
-    
-   matthewsCorrelation <-  matthew(TP,FP,TN,FN)
+   matthewsCorrelation <-  createMatthew(confusionMat)
    
-  
     sink(file = paste("NN.txt"), append = T)
     
     cat("NeuralNet")
