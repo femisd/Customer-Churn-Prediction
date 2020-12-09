@@ -15,7 +15,7 @@ rm(list=ls())
 # * ***********************************************
 # Global Environment Variables (available to all functions)
 
-DATASET <- "PreprocessedTelco.csv"  # Name of the input dataset csv file
+DATASET <- "without1HotForDT.csv"  # Name of the input dataset csv file
 PREDICTOR <- "ChurnYes"  # Field name of the output class to predict
 
 # Define and then load the libraries used in this project
